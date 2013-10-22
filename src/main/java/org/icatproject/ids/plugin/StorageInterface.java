@@ -16,7 +16,7 @@ public interface StorageInterface {
 
 	public InputStream getDataset(String location) throws IOException;
 
-	public InputStream getPreparedZip(String zipName, long offset) throws IOException;
+	public InputStream getPreparedZip(String zipName) throws IOException;
 
 	/** Write to datafile file at location */
 	public long putDatafile(String location, InputStream is) throws IOException;
