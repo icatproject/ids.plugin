@@ -59,15 +59,25 @@ public interface MainStorageInterface {
 	public boolean exists(DsInfo dsInfo) throws IOException;
 
 	/**
-	 * Return a stream of the zipped data for the specified data set
+	 * Return a stream of data from the specified data file
 	 * 
-	 * @param dsInfo
-	 *            describes the data set being returned
+	 * @param location
+	 *            location of the data file to be returned
 	 * 
-	 * @return input stram of zipped data
+	 * @return input stream of data
 	 * 
 	 * @throws IOException
 	 */
-	public InputStream get(DsInfo dsInfo) throws IOException;
+	public InputStream get(String location) throws IOException;
+
+	/**
+	 * Deletes the specified file
+	 * 
+	 * @param location
+	 *            location of the data file to be deleted
+	 * 
+	 * @throws IOException
+	 */
+	public void delete(String location) throws IOException;
 
 }
