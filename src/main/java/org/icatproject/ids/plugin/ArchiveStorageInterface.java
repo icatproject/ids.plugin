@@ -9,4 +9,6 @@ public interface ArchiveStorageInterface {
 
 	public void put(DsInfo dsInfo, InputStream inputStream) throws IOException;
 
+	public InputStream get(DsInfo dsInfo) throws IOException;
+
 }

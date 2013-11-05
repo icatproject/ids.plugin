@@ -2,6 +2,7 @@ package org.icatproject.ids.plugin;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 public interface MainStorageInterface {
 	public class DfInfo {
@@ -79,5 +80,27 @@ public interface MainStorageInterface {
 	 * @throws IOException
 	 */
 	public void delete(String location) throws IOException;
+
+	/**
+	 * Deletes the files of the specified data set
+	 * 
+	 * @param dsInfo
+	 *            describes the data set with the files to be deleted
+	 * 
+	 * @throws IOException
+	 */
+	public void delete(DsInfo dsInfo) throws IOException;
+
+	/**
+	 * Returns a list of locations of the files of the specified data set
+	 * 
+	 * @param dsInfo
+	 *            describes the data set with the files to be deleted
+	 * 
+	 * @return list of locations
+	 * 
+	 * @throws IOException
+	 */
+	public List<String> getLocations(DsInfo dsInfo) throws IOException;
 
 }
