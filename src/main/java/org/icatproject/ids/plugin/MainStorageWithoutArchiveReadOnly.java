@@ -22,7 +22,7 @@ public abstract class MainStorageWithoutArchiveReadOnly extends MainStorageWitho
 	 * This is a dummy implementation
 	 */
 	@Override
-	public DfInfo put(DsInfo dsInfo, String name, InputStream inputStream) throws IOException {
+	public String put(DsInfo dsInfo, String name, InputStream inputStream) throws IOException {
 		throw new IOException("Please add \"readOnly\" to the ids.properties file");
 	}
 
