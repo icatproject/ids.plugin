@@ -8,13 +8,14 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <repoUrl>http://www.icatproject.org/mvn/repo</repoUrl>
     </properties>
 
     <distributionManagement>
         <downloadUrl>http://www.icatproject.org/mvn/repo</downloadUrl>
         <site>
             <id>website</id>
-            <url>scp://www.icatproject.org/var/www/html/mvn/site/ids.plugin/${project.version}</url>
+            <url>scp://www.icatproject.org/var/www/html/mvn/site/ids/plugin/${project.version}</url>
         </site>
         <repository>
             <id>repo</id>
@@ -61,7 +62,7 @@
         <dependency>
             <groupId>org.icatproject</groupId>
             <artifactId>icat.client</artifactId>
-            <version>4.3.0-SNAPSHOT</version>
+            <version>4.3.0</version>
         </dependency>
 
     </dependencies>
@@ -79,7 +80,6 @@
                 </configuration>
             </plugin>
 
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
@@ -92,6 +92,22 @@
                     </dependency>
                 </dependencies>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.7</version>
+                <dependencies>
+                    <dependency><!-- add support for ssh/scp -->
+                        <groupId>org.apache.maven.wagon</groupId>
+                        <artifactId>wagon-ssh</artifactId>
+                        <version>1.0</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+
+
 
         </plugins>
 
