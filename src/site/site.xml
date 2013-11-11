@@ -1,0 +1,15 @@
+<project xmlns="http://maven.apache.org/DECORATION/1.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache.org/xsd/decoration-1.0.0.xsd">
+  <body>
+    <menu name="Contents">
+      <item name="Writing an IDS plugin" href="manual.html"/>
+      <item name="Javadoc" href="apidocs/index.html" />
+      <item name="Release notes" href="release-notes.html"/>
+    </menu>
+   
+    <menu ref="reports"/>
+   <footer>No rights reserved.</footer>
+     
+  </body>
+</project>
