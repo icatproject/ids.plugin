@@ -7,169 +7,40 @@
 
     <body>
 
-        <section name="Installation">
+        <section name="The interface">
+            <p>
+                IDS plugins have two interfaces to implement. Please see the
+                <a href="apidocs/index.html">Javadoc</a>
+                for details. The IDS has a two level storage model with main storage and an optional archive storage. The main storage deals with
+                individual data files whereas the archive storage deals with zip files holding all the datafiles of a dataset.
+            </p>
 
-            <subsection name="Compatibility">This will work with an ICAT version of 4.3.0 or greater.</subsection>
+            <p>
+                If you only have main storage then a number of the calls to main storage will not be used. An abstract implementation is provided
+                <a href="apidocs/org/icatproject/ids/plugin/MainStorageWithoutArchive.html">MainStorageWithoutArchive</a>
+                which only leaves three methods to implement: get, put and delete. The methods "get" and "delete just take a datafile location as
+                stored
+                in the ICAT datafile object. The "put" method takes a DsInfo object, a datafile name and an InpuStream. The DsInfo provides a
+                lot of
+                information for the implementation to decide what location to give the file it must store it there and return the location.
+            </p>
 
-            <subsection name="Prerequisites">
+            <p>
+                Finally if you don't want to support write operations (uploading and deletion of files) then there is another abstract implementation
+                <a href="apidocs/org/icatproject/ids/plugin/MainStorageWithoutArchiveReadOnly.html">MainStorageWithoutArchiveReadOnly</a>
+                which only needs the "get" method to be implemented. In this case please set the readOnly flag in the ids.properties when you deploy.
+            </p>
 
-                <ul>
-                    <li>
-                        The ids distribution:
-                        <a href="${repoUrl}/org/icatproject/ids.server/${project.version}/ids.server-${project.version}-distro.zip">ids.server-${project.version}-distro.zip</a>
-                    </li>
+        </section>
 
-                    <li>
-                        A suitable deployed container (here assumed to be glassfish though tomcat should be sufficient) to support a web
-                        application.
-                        Testing has been carried out with Glassfish 3.1.2.
-                        <a href="https://code.google.com/p/icatproject/wiki/Glassfish">Glassfish installation instructions</a>
-                        are available.
-                    </li>
-
-                    <li>
-                        A plugin or plugins for the storage mechanism you wish to use. Please see
-                        <a href="/mvn/site/ids/plugin">plugin</a>
-                        to see the interface you must
-                        implement. You might also like to look at the
-                        <a href="/mvn/site/ids/storage_file">file storage plugin</a>
-                        as an example.
-                    </li>
-
-                    <li>
-                        Python (version 2.4 to 2.7) installed on the server.
-                    </li>
-                </ul>
-            </subsection>
-
-            <subsection name="Summary of steps">
-                <ol>
-                    <li>
-                        Please follow
-                        <a href="http://code.google.com/p/icatproject/wiki/Installation"> the generic installation instructions</a>
-                    </li>
-
-                    <li>Check that it works.</li>
-                </ol>
-            </subsection>
-
-            <subsection name="The ids.setup.properties file">
-
-                <dl>
-
-                    <dt>glassfish</dt>
-                    <dd>is the top level of the glassfish installation. It must contain "glassfish/domains", and will be referred to here as
-                        GLASSFISH_HOME as if an environment variable had been set.
-                    </dd>
-                    <dt>port</dt>
-                    <dd>is the administration port of the chosen glassfish domain which is typically 4848.</dd>
-                </dl>
-
-
-            </subsection>
-
-
-            <subsection name="The ids.properties file">
-
-                <h4>General Properties</h4>
-
-                <dl>
-                    <dt> icat.url</dt>
-                    <dd>
-                        The url of the machine hosting the ids service. It should normally just
-                        have the scheme, the hostname and the port. For
-                        example:
-                        <code>https://example.com:443</code>
-                    </dd>
-
-                    <dt>plugin.main.class</dt>
-                    <dd>The class name of the main storage plugin. The class must be deployed in the lib/applibs directory of your domain and must be
-                        packaged with all it dependencies.
-                    </dd>
-
-                    <dt>plugin.main.properties</dt>
-                    <dd>Property file for the main storage plugin.</dd>
-
-                    <dt>cache.dir</dt>
-                    <dd>The location (absolute or relative to the config directory of the domain) of a directory to hold mostly zip files.</dd>
-
-                    <dt>preparedCacheSize1024bytes</dt>
-                    <dd>The maximum size to allow for prepared zip files in the cache.</dd>
-
-                    <dt>preparedCount</dt>
-                    <dd>The maximum number of failed prepareData attempts to hold in memory.</dd>
-
-                    <dt>processQueueIntervalSeconds</dt>
-                    <dd>The frequency of checking the process queue. This is used both for cleaning old information from memory and for triggering
-                        movements between main and archive storage (if selected).
-                    </dd>
-
-                    <dt>rootUserNames</dt>
-                    <dd>A space separated list of users allowed to make the getServiceStatus call.</dd>
-
-                    <dt>reader</dt>
-                    <dd>
-                        space separated icat plugin name and credentials for a user permitted to read all data. For example:
-                        <code>db username root password password.</code>
-                    </dd>
-
-                    <dt>sizeCheckIntervalSeconds</dt>
-                    <dd>How frequently to check the cache sizes and clean up if necessary.</dd>
-
-                    <dt>readOnly</dt>
-                    <dd>If present disables write operations (put and delete)</dd>
-
-
-
-                </dl>
-
-                <h4>Properties for archive storage</h4>
-
-                <dl>
-
-                    <dt>plugin.archive.class</dt>
-                    <dd> The class name of the archive storage plugin. The class must be deployed in the lib/applibs directory of your domain and must
-                        be
-                        packaged with all it dependencies.
-                    </dd>
-
-                    <dt>plugin.archive.properties</dt>
-                    <dd>Property file for the archive storage plugin.</dd>
-
-                    <dt>datasetCacheSize1024bytes</dt>
-                    <dd>The maximum size to allow for dataset zip files in the cache.</dd>
-
-                    <dt>writeDelaySeconds</dt>
-                    <dd>The amount of time to wait before writing to archive storage. This exists to allow enough time for all the datafiles to be
-                        added to a dataset before it is zipped and written.
-                    </dd>
-
-                    <dt>compressDatasetCache</dt>
-                    <dd>If present the dataset cache and the archive storage of datasets will all be compressed. This takes longer to write and is
-                        only
-                        useful if you know that the data will compress well.
-                    </dd>
-
-                    <dt>tolerateWrongCompression</dt>
-                    <dd>If present then a get or prepareData which is for a single dataset will make use of the dataset cache even though it does not
-                        match the requested compression.
-                    </dd>
-
-                </dl>
-
-            </subsection>
-
-            <subsection name="Check that the ids server works">
-                <p>
-                    Enter a url of the form
-                    <code>https://example.com:443/ids/ping</code>
-                    into a web browse and it should respond:
-                    <code>IdsOK</code>
-                    . Note the url is that of the machine hosting the IDS followed by "/ids/ping"
-                </p>
-
-            </subsection>
-
+        <section name="Packaging">
+            <p>
+                The IDS expects to find its plugins in lib/applibs below the domain directory. The plugins must be packaged will all dependencies -
+                because of the way
+                the Glassfish classloader works and after deployment Glassfish must be redeployed. Please see the
+                <a href="/mvn/site/ids/storage_file">file storage plugin</a>
+                as an example of how to do it.
+            </p>
         </section>
     </body>
 </document>
