@@ -2,7 +2,6 @@ package org.icatproject.ids.plugin;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 
 /**
  * An IDS interface which for which an implementation must be provided for any IDS deployment.
@@ -58,20 +57,6 @@ public interface MainStorageInterface {
 	public InputStream get(String location) throws IOException;
 
 	/**
-	 * Returns a list of locations of the files of the specified data set.
-	 * 
-	 * A dummy implementation can be provided if no archive storage is configured.
-	 * 
-	 * @param dsInfo
-	 *            describes the data set with the files to be deleted
-	 * 
-	 * @return list of locations
-	 * 
-	 * @throws IOException
-	 */
-	public List<String> getLocations(DsInfo dsInfo) throws IOException;
-
-	/**
 	 * Store the specified data file and return information about the file
 	 * 
 	 * @param dsInfo
@@ -86,5 +71,22 @@ public interface MainStorageInterface {
 	 * @throws IOException
 	 */
 	public String put(DsInfo dsInfo, String name, InputStream inputStream) throws IOException;
+
+	/**
+	 * Store the data file at the specified location
+	 * 
+	 * @param dsInfo
+	 *            describes the data set to which the data file should be added
+	 * @param name
+	 *            name of file within data set
+	 * @param inputStream
+	 *            stream of data to store
+	 * @param location
+	 *            where to store the file
+	 * 
+	 * @throws IOException
+	 */
+	public void put(DsInfo dsInfo, String name, InputStream inputStream, String location)
+			throws IOException;
 
 }
