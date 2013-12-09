@@ -49,12 +49,16 @@ public interface MainStorageInterface {
 	 * 
 	 * @param location
 	 *            location of the data file to be returned
+	 * @param creator
+	 *            the icat user name of the creator of this datafile. This is provided so that the
+	 *            implementation can choose whether or not to trust the ICAT datafile object which
+	 *            holds this location field.
 	 * 
 	 * @return input stream of data
 	 * 
 	 * @throws IOException
 	 */
-	public InputStream get(String location) throws IOException;
+	public InputStream get(String location, String creator) throws IOException;
 
 	/**
 	 * Store the specified data file and return information about the file
@@ -75,10 +79,6 @@ public interface MainStorageInterface {
 	/**
 	 * Store the data file at the specified location
 	 * 
-	 * @param dsInfo
-	 *            describes the data set to which the data file should be added
-	 * @param name
-	 *            name of file within data set
 	 * @param inputStream
 	 *            stream of data to store
 	 * @param location
@@ -86,7 +86,6 @@ public interface MainStorageInterface {
 	 * 
 	 * @throws IOException
 	 */
-	public void put(DsInfo dsInfo, String name, InputStream inputStream, String location)
-			throws IOException;
+	public void put(InputStream inputStream, String location) throws IOException;
 
 }
