@@ -21,6 +21,13 @@ public interface DsInfo {
 	String getDsName();
 
 	/**
+	 * Return the data set location
+	 * 
+	 * @return the data set location
+	 */
+	String getDsLocation();
+
+	/**
 	 * Return the facility id
 	 * 
 	 * @return the facility id

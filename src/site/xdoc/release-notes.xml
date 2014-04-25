@@ -6,9 +6,16 @@
     </properties>
 
     <body>
+
+        <section name="1.1.0">
+            <p>Extra dataset information available via the DsInfo interface.
+            </p>
+        </section>
+
         <section name="1.0.0">
             <p>Initial public release.
             </p>
         </section>
+
     </body>
 </document>
