@@ -32,7 +32,7 @@ public interface ArchiveStorageInterface {
 	public void put(DsInfo dsInfo, InputStream inputStream) throws IOException;
 
 	/**
-	 * Deletes the specified data set.
+	 * Get the specified data set.
 	 * 
 	 * @param dsInfo
 	 *            describes the data set
