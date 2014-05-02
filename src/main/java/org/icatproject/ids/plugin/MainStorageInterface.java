@@ -53,12 +53,13 @@ public interface MainStorageInterface {
 	 *            the icat user name of the creator of this datafile. This is provided so that the
 	 *            implementation can choose whether or not to trust the ICAT datafile object which
 	 *            holds this location field.
+	 * @param string
 	 * 
 	 * @return input stream of data
 	 * 
 	 * @throws IOException
 	 */
-	public InputStream get(String location, String creator) throws IOException;
+	public InputStream get(String location, String createId, String modId) throws IOException;
 
 	/**
 	 * Store the specified data file and return information about the file

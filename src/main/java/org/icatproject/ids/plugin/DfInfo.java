@@ -3,11 +3,11 @@ package org.icatproject.ids.plugin;
 public interface DfInfo {
 
 	/**
-	 * Return the data file name
+	 * Return the id of whoever created the data file
 	 * 
-	 * @return the data file name
+	 * @return the data file creator
 	 */
-	String getDfName();
+	String getCreateId();
 
 	/**
 	 * Return the data file id
@@ -24,10 +24,17 @@ public interface DfInfo {
 	String getDfLocation();
 
 	/**
-	 * Return the data file creator - the createId field
+	 * Return the data file name
 	 * 
-	 * @return the data file creator
+	 * @return the data file name
 	 */
-	String getCreator();
+	String getDfName();
+
+	/**
+	 * Return the id of whoever modified the data file last
+	 * 
+	 * @return the data file modifier
+	 */
+	String getModId();
 
 }

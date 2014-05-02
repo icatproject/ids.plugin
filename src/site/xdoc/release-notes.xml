@@ -8,8 +8,15 @@
     <body>
 
         <section name="1.1.0">
-            <p>Extra dataset information available via the DsInfo interface.
+            <p>ZipMapperInterface provided and extra dataset information available via the DsInfo interface.
             </p>
+            <ul>
+                <li>DsInfo now provides Dataset.location</li>
+                <li>DfInfo now has getCreateId() and getModId() rather than getCreator()</li>
+                <li>A ZipMapperInterface has been added</li>
+                <li>The get call of the MainStorageInterface now has the signature: "String location, String createId, String modId" so that you can
+                    access both the modId and the createId.</li>
+            </ul>
         </section>
 
         <section name="1.0.0">

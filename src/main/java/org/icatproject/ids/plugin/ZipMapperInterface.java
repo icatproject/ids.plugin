@@ -1,5 +1,7 @@
 package org.icatproject.ids.plugin;
 
+import java.io.IOException;
+
 /**
  * 
  * Handle the generation and of the full entry name for a zip file entry and derive the
@@ -16,8 +18,9 @@ public interface ZipMapperInterface {
 	 * @param dfInfo
 	 * 
 	 * @return full entry name
+	 * @throws IOException 
 	 */
-	public String getFullEntryName(DsInfo dsInfo, DfInfo dfInfo);
+	public String getFullEntryName(DsInfo dsInfo, DfInfo dfInfo) throws IOException;
 
 	/**
 	 * Derive Datafile.name as known in ICAT for the zip file entry fullEntryName
@@ -25,7 +28,8 @@ public interface ZipMapperInterface {
 	 * @param fullEntryName
 	 * 
 	 * @return Datafile.name or null if not possible
+	 * @throws IOException
 	 */
-	public String getFileName(String fullEntryName);
+	public String getFileName(String fullEntryName) throws IOException;
 
 }
