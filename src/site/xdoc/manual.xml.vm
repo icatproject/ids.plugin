@@ -9,10 +9,11 @@
 
         <section name="The interface">
             <p>
-                IDS plugins have two interfaces to implement. Please see the
+                IDS plugins have three interfaces to implement. Please see the
                 <a href="apidocs/index.html">Javadoc</a>
                 for details. The IDS has a two level storage model with main storage and an optional archive storage. The main storage deals with
-                individual data files whereas the archive storage deals with zip files holding all the datafiles of a dataset.
+                individual data files whereas the archive storage deals with zip files holding all the datafiles of a dataset. In addition the
+                ZipMapperInterface must be implemented to define the structure of the Zip file which is used for downloads and for archive storage.
             </p>
 
             <p>
