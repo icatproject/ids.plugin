@@ -2,6 +2,7 @@ package org.icatproject.ids.plugin;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 /**
  * An IDS interface which for which an implementation must be provided for any IDS deployment.
@@ -60,6 +61,50 @@ public interface MainStorageInterface {
 	 * @throws IOException
 	 */
 	public InputStream get(String location, String createId, String modId) throws IOException;
+
+	/**
+	 * Return a list of dataset ids for an investigation ordered by date with the oldest first
+	 * 
+	 * A dummy implementation can be provided if no archive storage is configured.
+	 * 
+	 * The implementer can choose exactly what the date represents. Old datasets will be archived
+	 * first if space is low. Ideally the date would be the date when the dataset was last retrieved
+	 * from main storage.
+	 * 
+	 * @param invId
+	 *            The id of the investigation
+	 * 
+	 * @return list of dataset ids
+	 * 
+	 * @throws IOException
+	 */
+	public List<Long> getDatasets(long invId) throws IOException;
+
+	/**
+	 * Return a list of investigation ids ordered by date with the oldest first
+	 * 
+	 * A dummy implementation can be provided if no archive storage is configured.
+	 * 
+	 * The implementer can choose exactly what the date represents. Old investigations will be
+	 * archived first if space is low. Ideally the date would be the date when the investigation was
+	 * last retrieved from main storage.
+	 * 
+	 * @return list of investigation ids
+	 * 
+	 * @throws IOException
+	 */
+	public List<Long> getInvestigations() throws IOException;
+
+	/**
+	 * Return an estimate of the number of bytes that can be written to main storage
+	 * 
+	 * A dummy implementation can be provided if no archive storage is configured.
+	 * 
+	 * @return estimate of the number of bytes that can be written to main storage
+	 * 
+	 * @throws IOException
+	 */
+	public long getUsableSpace() throws IOException;
 
 	/**
 	 * Store the specified data file and return information about the file

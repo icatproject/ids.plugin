@@ -7,15 +7,30 @@
 
     <body>
 
+        <section name="1.2.0">
+            <p>Three more operations required by the MainStorageInterface. Also a new MainStorageReadOnly class is
+                provided.
+            </p>
+            <ul>
+                <li>getUsableSpace has been added</li>
+                <li>getInvestigations has been added </li>
+                <li>getDatasets has been added</li>
+                <li>MainStorageReadOnly class provided with dummy implementations of those operations not needed when the readOnly flag has been set
+                    in the ids.properties file
+                </li>
+            </ul>
+        </section>
+
         <section name="1.1.0">
-            <p>ZipMapperInterface provided and extra dataset information available via the DsInfo interface.
+            <p>ZipMapperInterface provided and extra dataset information available via the DsInfo interface
             </p>
             <ul>
                 <li>DsInfo now provides Dataset.location</li>
                 <li>DfInfo now has getCreateId() and getModId() rather than getCreator()</li>
                 <li>A ZipMapperInterface has been added</li>
                 <li>The get call of the MainStorageInterface now has the signature: "String location, String createId, String modId" so that you can
-                    access both the modId and the createId.</li>
+                    access both the modId and the createId.
+                </li>
             </ul>
         </section>
 

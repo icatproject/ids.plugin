@@ -2,6 +2,7 @@ package org.icatproject.ids.plugin;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 /**
  * This is a partial implementation of a MainStorageInterface providing dummy implementations of
@@ -35,7 +36,38 @@ public abstract class MainStorageWithoutArchive implements MainStorageInterface 
 	 * 
 	 * @throws IOException
 	 */
+	@Override
 	public void put(InputStream inputStream, String location) throws IOException {
+		throw new IOException("Please do not request an archive plugin in the ids.properties file");
+	}
+
+	/**
+	 * This is a dummy implementation
+	 * 
+	 * @throws IOException
+	 */
+	@Override
+	public long getUsableSpace() throws IOException {
+		throw new IOException("Please do not request an archive plugin in the ids.properties file");
+	}
+
+	/**
+	 * This is a dummy implementation
+	 * 
+	 * @throws IOException
+	 */
+	@Override
+	public List<Long> getInvestigations() throws IOException {
+		throw new IOException("Please do not request an archive plugin in the ids.properties file");
+	}
+
+	/**
+	 * This is a dummy implementation
+	 * 
+	 * @throws IOException
+	 */
+	@Override
+	public List<Long> getDatasets(long invId) throws IOException {
 		throw new IOException("Please do not request an archive plugin in the ids.properties file");
 	}
 
