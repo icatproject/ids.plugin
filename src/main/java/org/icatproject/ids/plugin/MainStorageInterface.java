@@ -2,6 +2,7 @@ package org.icatproject.ids.plugin;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Path;
 import java.util.List;
 
 /**
@@ -49,12 +50,15 @@ public interface MainStorageInterface {
 	 * Return a stream of data from the specified data file
 	 * 
 	 * @param location
-	 *            location of the data file to be returned
-	 * @param creator
+	 *            the value from datafile.location
+	 * @param createId
 	 *            the icat user name of the creator of this datafile. This is provided so that the
 	 *            implementation can choose whether or not to trust the ICAT datafile object which
 	 *            holds this location field.
-	 * @param string
+	 * @param modId
+	 *            the icat user name of the modifier of this datafile. This is provided so that the
+	 *            implementation can choose whether or not to trust the ICAT datafile object which
+	 *            holds this location field.
 	 * 
 	 * @return input stream of data
 	 * 
@@ -133,5 +137,32 @@ public interface MainStorageInterface {
 	 * @throws IOException
 	 */
 	public void put(InputStream inputStream, String location) throws IOException;
+
+	/**
+	 * Return the physical path corresponding to a location for a datafile or null if the file
+	 * system is not available to the user.
+	 * 
+	 * This is only useful if the file system is available to the user. In this case all files on
+	 * the file system should only be readable by the user running the ids server.
+	 * 
+	 * If the file system is not available to the user this method should return null. The user will
+	 * then receive a NotImplementedException.
+	 * 
+	 * @param location
+	 *            the value from datafile.location
+	 * @param createId
+	 *            the icat user name of the creator of this datafile. This is provided so that the
+	 *            implementation can choose whether or not to trust the ICAT datafile object which
+	 *            holds this location field.
+	 * @param modId
+	 *            the icat user name of the modifier of this datafile. This is provided so that the
+	 *            implementation can choose whether or not to trust the ICAT datafile object which
+	 *            holds this location field.
+	 * 
+	 * @return physical path or null if the file system is not available to the user
+	 * 
+	 * @throws IOException
+	 */
+	public Path getPath(String location, String createId, String modId) throws IOException;
 
 }

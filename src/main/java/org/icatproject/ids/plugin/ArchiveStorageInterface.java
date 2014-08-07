@@ -2,6 +2,7 @@ package org.icatproject.ids.plugin;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Path;
 
 /**
  * An IDS interface which for which an implementation must be provided for an IDS deployment with
@@ -37,10 +38,11 @@ public interface ArchiveStorageInterface {
 	 * @param dsInfo
 	 *            describes the data set
 	 * 
-	 * @return a stream of data from the specified data set
+	 * @param path
+	 *            path of the file to write to (it will be overwritten if it already exists)
 	 * 
 	 * @throws IOException
 	 */
-	public InputStream get(DsInfo dsInfo) throws IOException;
+	public void get(DsInfo dsInfo, Path path) throws IOException;
 
 }

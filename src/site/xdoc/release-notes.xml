@@ -18,6 +18,7 @@
                 <li>MainStorageReadOnly class provided with dummy implementations of those operations not needed when the readOnly flag has been set
                     in the ids.properties file
                 </li>
+                <li>The get method for the ArchiveStorageInterface now writes to a file rather than returning a stream.</li>
             </ul>
         </section>
 
