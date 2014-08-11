@@ -100,15 +100,19 @@ public interface MainStorageInterface {
 	public List<Long> getInvestigations() throws IOException;
 
 	/**
-	 * Return an estimate of the number of bytes that can be written to main storage
+	 * Return the number of bytes of main storage used
 	 * 
-	 * A dummy implementation can be provided if no archive storage is configured.
+	 * A dummy implementation may be provided if no archive storage is configured. This operation is
+	 * invoked by the server to determine when to to request that datasets are archived. The value
+	 * returned should be a reasonable estimate of the occupied space or zero if it is clear that no
+	 * cleanup is necessary. For example Files.getFileStore(path).getUseableSpace will tell you how
+	 * much space you have left on the partition holding "path".
 	 * 
-	 * @return estimate of the number of bytes that can be written to main storage
+	 * @return the number of bytes of main storage used
 	 * 
 	 * @throws IOException
 	 */
-	public long getUsableSpace() throws IOException;
+	public long getUsedSpace() throws IOException;
 
 	/**
 	 * Store the specified data file and return information about the file
@@ -139,14 +143,12 @@ public interface MainStorageInterface {
 	public void put(InputStream inputStream, String location) throws IOException;
 
 	/**
-	 * Return the physical path corresponding to a location for a datafile or null if the file
-	 * system is not available to the user.
+	 * Return the physical path corresponding to a location for a datafile.
 	 * 
 	 * This is only useful if the file system is available to the user. In this case all files on
 	 * the file system should only be readable by the user running the ids server.
 	 * 
-	 * If the file system is not available to the user this method should return null. The user will
-	 * then receive a NotImplementedException.
+	 * If the file system is not available to the user a dummy implementation may be provided.
 	 * 
 	 * @param location
 	 *            the value from datafile.location
@@ -159,7 +161,7 @@ public interface MainStorageInterface {
 	 *            implementation can choose whether or not to trust the ICAT datafile object which
 	 *            holds this location field.
 	 * 
-	 * @return physical path or null if the file system is not available to the user
+	 * @return physical path
 	 * 
 	 * @throws IOException
 	 */

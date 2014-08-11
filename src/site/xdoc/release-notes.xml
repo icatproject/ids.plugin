@@ -12,7 +12,7 @@
                 provided.
             </p>
             <ul>
-                <li>getUsableSpace has been added</li>
+                <li>getUsedSpace has been added</li>
                 <li>getInvestigations has been added </li>
                 <li>getDatasets has been added</li>
                 <li>MainStorageReadOnly class provided with dummy implementations of those operations not needed when the readOnly flag has been set
