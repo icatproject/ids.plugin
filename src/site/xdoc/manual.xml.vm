@@ -27,9 +27,10 @@
             </p>
 
             <p>
-                Finally if you don't want to support write operations (uploading and deletion of files) then there is another abstract implementation
+                There are a number of abstract partial implementations provided - for example
                 <a href="apidocs/org/icatproject/ids/plugin/MainStorageWithoutArchiveReadOnly.html">MainStorageWithoutArchiveReadOnly</a>
-                which only needs the "get" method to be implemented. In this case please set the readOnly flag in the ids.properties when you deploy.
+                which you may extend.
+                In this case please set the readOnly flag in the ids.properties when you deploy.
             </p>
 
         </section>
