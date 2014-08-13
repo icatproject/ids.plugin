@@ -16,30 +16,22 @@
                 ZipMapperInterface must be implemented to define the structure of the Zip file which is used for downloads and for archive storage.
             </p>
 
-            <p>
-                If you only have main storage then a number of the calls to main storage will not be used. An abstract implementation is provided
-                <a href="apidocs/org/icatproject/ids/plugin/MainStorageWithoutArchive.html">MainStorageWithoutArchive</a>
-                which only leaves three methods to implement: get, put and delete. The methods "get" and "delete just take a datafile location as
-                stored
-                in the ICAT datafile object. The "put" method takes a DsInfo object, a datafile name and an InpuStream. The DsInfo provides a
-                lot of
-                information for the implementation to decide what location to give the file it must store it there and return the location.
-            </p>
 
             <p>
                 There are a number of abstract partial implementations provided - for example
+                <a href="apidocs/org/icatproject/ids/plugin/MainStorageWithoutArchive.html">MainStorageWithoutArchive</a>
+                and
                 <a href="apidocs/org/icatproject/ids/plugin/MainStorageWithoutArchiveReadOnly.html">MainStorageWithoutArchiveReadOnly</a>
-                which you may extend.
-                In this case please set the readOnly flag in the ids.properties when you deploy.
+                which you may extend. These provide dummy implementations of calls which are not made in specific deployments.
             </p>
 
         </section>
 
         <section name="Packaging">
             <p>
-                The IDS expects to find its plugins in lib/applibs below the domain directory. The plugins must be packaged will all dependencies -
-                because of the way
-                the Glassfish classloader works and after deployment Glassfish must be redeployed. Please see the
+                For Glassfish deployment the IDS expects to find its plugins in lib/applibs below the domain directory. The plugins must be packaged
+                will all dependencies - because of the way the Glassfish classloader works and after deployment Glassfish must be redeployed. Please
+                see the
                 <a href="/mvn/site/ids/storage_file">file storage plugin</a>
                 as an example of how to do it.
             </p>

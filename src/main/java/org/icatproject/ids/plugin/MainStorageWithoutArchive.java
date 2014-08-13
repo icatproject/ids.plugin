@@ -60,5 +60,13 @@ public abstract class MainStorageWithoutArchive implements MainStorageInterface 
 	public List<Long> getDatasets(long invId) throws IOException {
 		throw new IOException("Please do not request an archive plugin in the ids.properties file");
 	}
+	
+	/**
+	 * This is a dummy implementation
+	 */
+	@Override
+	public long getUsedSpace() throws IOException {
+		throw new IOException("Please do not request an archive plugin in the ids.properties file");
+	}
 
 }
