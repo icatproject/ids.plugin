@@ -35,7 +35,8 @@ public interface MainStorageInterface {
 	/**
 	 * See if the data set exists.
 	 * 
-	 * A dummy implementation can be provided if no archive storage is configured.
+	 * A dummy implementation can be provided if no archive storage is configured with storageUnit
+	 * set to dataset
 	 * 
 	 * @param dsInfo
 	 *            describes the data set being queried
@@ -45,6 +46,21 @@ public interface MainStorageInterface {
 	 * @throws IOException
 	 */
 	public boolean exists(DsInfo dsInfo) throws IOException;
+
+	/**
+	 * See if the data file exists.
+	 * 
+	 * A dummy implementation can be provided if no archive storage is configured with storageUnit
+	 * set to datafile
+	 * 
+	 * @param location
+	 *            the value from datafile.location
+	 * 
+	 * @return true if the data file exists
+	 * 
+	 * @throws IOException
+	 */
+	public boolean exists(String location) throws IOException;
 
 	/**
 	 * Return a stream of data from the specified data file
