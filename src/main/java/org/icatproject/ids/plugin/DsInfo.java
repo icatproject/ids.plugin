@@ -11,7 +11,7 @@ public interface DsInfo {
 	 * 
 	 * @return the data set id
 	 */
-	long getDsId();
+	Long getDsId();
 
 	/**
 	 * Return the data set name
@@ -32,7 +32,7 @@ public interface DsInfo {
 	 * 
 	 * @return the facility id
 	 */
-	long getFacilityId();
+	Long getFacilityId();
 
 	/**
 	 * Return the facility name
@@ -46,7 +46,7 @@ public interface DsInfo {
 	 * 
 	 * @return the investigation id
 	 */
-	long getInvId();
+	Long getInvId();
 
 	/**
 	 * Return the investigation name

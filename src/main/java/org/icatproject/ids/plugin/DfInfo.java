@@ -14,7 +14,7 @@ public interface DfInfo {
 	 * 
 	 * @return the data file id
 	 */
-	long getDfId();
+	Long getDfId();
 
 	/**
 	 * Return the data file location

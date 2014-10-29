@@ -13,14 +13,6 @@ public abstract class MainStorageReadOnly implements MainStorageInterface {
 	 * This is a dummy implementation
 	 */
 	@Override
-	public void delete(String location) throws IOException {
-		throw new IOException("Please add \"readOnly\" to the ids.properties file");
-	}
-
-	/**
-	 * This is a dummy implementation
-	 */
-	@Override
 	public String put(DsInfo dsInfo, String name, InputStream inputStream) throws IOException {
 		throw new IOException("Please add \"readOnly\" to the ids.properties file");
 	}

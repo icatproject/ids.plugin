@@ -28,27 +28,28 @@ public class MainStorageReadOnlyImpl extends MainStorageReadOnly {
 	}
 
 	@Override
-	public List<Long> getDatasets(long invId) throws IOException {
-		return null;
-	}
-
-	@Override
-	public List<Long> getInvestigations() throws IOException {
-		return null;
-	}
-
-	@Override
 	public Path getPath(String location, String createId, String modId) throws IOException {
 		return null;
 	}
 
 	@Override
-	public long getUsedSpace() throws IOException {
-		return 0;
+	public void put(InputStream inputStream, String location) throws IOException {
 	}
 
 	@Override
-	public void put(InputStream inputStream, String location) throws IOException {
+	public List<DsInfo> getDatasetsToArchive(long lowArchivingLevel, long highArchivingLevel)
+			throws IOException {
+		return null;
+	}
+
+	@Override
+	public List<DfInfo> getDatafilesToArchive(long lowArchivingLevel, long highArchivingLevel)
+			throws IOException {
+		return null;
+	}
+
+	@Override
+	public void delete(String location) throws IOException {
 	}
 
 }

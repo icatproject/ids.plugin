@@ -85,7 +85,9 @@ public interface ArchiveStorageInterface {
 	 *            list of DfInfo objects
 	 * 
 	 * @return setof DfInfo objects which could not be restored
+	 * 
+	 * @throws IOException 
 	 */
-	public Set<DfInfo> restore(MainStorageInterface mainStorageInterface, List<DfInfo> dfInfos);
+	public Set<DfInfo> restore(MainStorageInterface mainStorageInterface, List<DfInfo> dfInfos) throws IOException;
 
 }

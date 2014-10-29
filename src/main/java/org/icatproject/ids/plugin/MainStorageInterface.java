@@ -13,7 +13,8 @@ public interface MainStorageInterface {
 	/**
 	 * Deletes the files of the specified data set.
 	 * 
-	 * A dummy implementation can be provided if no archive storage is configured.
+	 * A dummy implementation can be provided if no archive storage is configured with storageUnit =
+	 * DATASET
 	 * 
 	 * @param dsInfo
 	 *            describes the data set with the files to be deleted
@@ -24,6 +25,9 @@ public interface MainStorageInterface {
 
 	/**
 	 * Deletes the specified file
+	 * 
+	 * A dummy may be provided if the readOnly flag is set and no archive storage has been
+	 * configured with storageUnit = DATAFILE
 	 * 
 	 * @param location
 	 *            location of the data file to be deleted
@@ -83,54 +87,6 @@ public interface MainStorageInterface {
 	public InputStream get(String location, String createId, String modId) throws IOException;
 
 	/**
-	 * Return a list of dataset ids for an investigation ordered by date with the oldest first
-	 * 
-	 * A dummy implementation can be provided if no archive storage is configured.
-	 * 
-	 * The implementer can choose exactly what the date represents. Old datasets will be archived
-	 * first if space is low. Ideally the date would be the date when the dataset was last retrieved
-	 * from main storage.
-	 * 
-	 * @param invId
-	 *            The id of the investigation
-	 * 
-	 * @return list of dataset ids
-	 * 
-	 * @throws IOException
-	 */
-	public List<Long> getDatasets(long invId) throws IOException;
-
-	/**
-	 * Return a list of investigation ids ordered by date with the oldest first
-	 * 
-	 * A dummy implementation can be provided if no archive storage is configured.
-	 * 
-	 * The implementer can choose exactly what the date represents. Old investigations will be
-	 * archived first if space is low. Ideally the date would be the date when the investigation was
-	 * last retrieved from main storage.
-	 * 
-	 * @return list of investigation ids
-	 * 
-	 * @throws IOException
-	 */
-	public List<Long> getInvestigations() throws IOException;
-
-	/**
-	 * Return the number of bytes of main storage used
-	 * 
-	 * A dummy implementation may be provided if no archive storage is configured. This operation is
-	 * invoked by the server to determine when to to request that datasets are archived. The value
-	 * returned should be a reasonable estimate of the occupied space or zero if it is clear that no
-	 * cleanup is necessary. For example Files.getFileStore(path).getUseableSpace will tell you how
-	 * much space you have left on the partition holding "path".
-	 * 
-	 * @return the number of bytes of main storage used
-	 * 
-	 * @throws IOException
-	 */
-	public long getUsedSpace() throws IOException;
-
-	/**
 	 * Store the specified data file and return information about the file
 	 * 
 	 * @param dsInfo
@@ -182,5 +138,53 @@ public interface MainStorageInterface {
 	 * @throws IOException
 	 */
 	public Path getPath(String location, String createId, String modId) throws IOException;
+
+	/**
+	 * Return the list of DsInfos which should be archived to reduce the used storage to between
+	 * lowArchivingLevel and highArchivingLevel.
+	 * 
+	 * A dummy implementation can be provided if no archive storage is configured with storageUnit
+	 * set to dataset
+	 * 
+	 * The implementaion is free to do this however it chooses. Use might be made of the information
+	 * available from the java.nio.file.FileStore (obtainable by Files.getFileStore(path) for any
+	 * file to see whether or not any action is required.
+	 * 
+	 * @param lowArchivingLevel
+	 *            don't try to reduce space below this level
+	 * @param highArchivingLevel
+	 *            if storage used is less than this return an empty list. Otherwise identify the
+	 *            list of DsInfos to get the space down to lowArchivingLevel
+	 * 
+	 * @return
+	 * 
+	 * @throws IOException
+	 */
+	public List<DsInfo> getDatasetsToArchive(long lowArchivingLevel, long highArchivingLevel)
+			throws IOException;
+
+	/**
+	 * Return the list of DfInfos which should be archived to reduce the used storage to between
+	 * lowArchivingLevel and highArchivingLevel.
+	 * 
+	 * A dummy implementation can be provided if no archive storage is configured with storageUnit
+	 * set to datafile
+	 * 
+	 * The implementaion is free to do this however it chooses. Use might be made of the information
+	 * available from the java.nio.file.FileStore (obtainable by Files.getFileStore(path) for any
+	 * file to see whether or not any action is required.
+	 * 
+	 * @param lowArchivingLevel
+	 *            don't try to reduce space below this level
+	 * @param highArchivingLevel
+	 *            if storage used is less than this return an empty list. Otherwise identify the
+	 *            list of DsInfos to get the space down to lowArchivingLevel
+	 * 
+	 * @return
+	 * 
+	 * @throws IOException
+	 */
+	public List<DfInfo> getDatafilesToArchive(long lowArchivingLevel, long highArchivingLevel)
+			throws IOException;
 
 }
