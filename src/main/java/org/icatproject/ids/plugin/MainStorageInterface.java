@@ -87,7 +87,8 @@ public interface MainStorageInterface {
 	public InputStream get(String location, String createId, String modId) throws IOException;
 
 	/**
-	 * Store the specified data file and return information about the file
+	 * Store the specified data file and return the chosen location of the file to allow it to be
+	 * retrieved.
 	 * 
 	 * @param dsInfo
 	 *            describes the data set to which the data file should be added
