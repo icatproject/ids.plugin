@@ -2,13 +2,14 @@
 <document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
 
     <properties>
-        <title>IDS Release Notes</title>
+        <title>IDS Plugin Release Notes</title>
     </properties>
 
     <body>
         <section name="1.3.0">
-            <p>Added new calls to support archive storgae by datafile rather than dataset.</p>
+            <p>Added new calls to support archive storage by datafile rather than dataset.</p>
             <li>New calls delete(DsInfo dsinfo) on ArchiveStorageInterface</li>
+            <li>Added createId and modId arguments to delete(String location) in MainStorageInterface</li>
         </section>
 
         <section name="1.2.0">

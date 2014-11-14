@@ -31,10 +31,18 @@ public interface MainStorageInterface {
 	 * 
 	 * @param location
 	 *            location of the data file to be deleted
+	 * @param createId
+	 *            the icat user name of the creator of this datafile. This is provided so that the
+	 *            implementation can choose whether or not to trust the ICAT datafile object which
+	 *            holds this location field.
+	 * @param modId
+	 *            the icat user name of the modifier of this datafile. This is provided so that the
+	 *            implementation can choose whether or not to trust the ICAT datafile object which
+	 *            holds this location field.
 	 * 
 	 * @throws IOException
 	 */
-	public void delete(String location) throws IOException;
+	public void delete(String location, String createId, String modId) throws IOException;
 
 	/**
 	 * See if the data set exists.
@@ -87,33 +95,52 @@ public interface MainStorageInterface {
 	public InputStream get(String location, String createId, String modId) throws IOException;
 
 	/**
-	 * Store the specified data file and return the chosen location of the file to allow it to be
-	 * retrieved.
+	 * Return the list of DfInfos which should be archived to reduce the used storage to between
+	 * lowArchivingLevel and highArchivingLevel.
 	 * 
-	 * @param dsInfo
-	 *            describes the data set to which the data file should be added
-	 * @param name
-	 *            name of file within data set
-	 * @param inputStream
-	 *            stream of data to store
+	 * A dummy implementation can be provided if no archive storage is configured with storageUnit
+	 * set to datafile
 	 * 
-	 * @return the location of the stored data file
+	 * The implementaion is free to do this however it chooses. Use might be made of the information
+	 * available from the java.nio.file.FileStore (obtainable by Files.getFileStore(path) for any
+	 * file to see whether or not any action is required.
+	 * 
+	 * @param lowArchivingLevel
+	 *            don't try to reduce space below this level
+	 * @param highArchivingLevel
+	 *            if storage used is less than this return an empty list. Otherwise identify the
+	 *            list of DsInfos to get the space down to lowArchivingLevel
+	 * 
+	 * @return list of DfInfos
 	 * 
 	 * @throws IOException
 	 */
-	public String put(DsInfo dsInfo, String name, InputStream inputStream) throws IOException;
+	public List<DfInfo> getDatafilesToArchive(long lowArchivingLevel, long highArchivingLevel)
+			throws IOException;
 
 	/**
-	 * Store the data file at the specified location
+	 * Return the list of DsInfos which should be archived to reduce the used storage to between
+	 * lowArchivingLevel and highArchivingLevel.
 	 * 
-	 * @param inputStream
-	 *            stream of data to store
-	 * @param location
-	 *            where to store the file
+	 * A dummy implementation can be provided if no archive storage is configured with storageUnit
+	 * set to dataset
+	 * 
+	 * The implementaion is free to do this however it chooses. Use might be made of the information
+	 * available from the java.nio.file.FileStore (obtainable by Files.getFileStore(path) for any
+	 * file to see whether or not any action is required.
+	 * 
+	 * @param lowArchivingLevel
+	 *            don't try to reduce space below this level
+	 * @param highArchivingLevel
+	 *            if storage used is less than this return an empty list. Otherwise identify the
+	 *            list of DsInfos to get the space down to lowArchivingLevel
+	 * 
+	 * @return list of DsInfos
 	 * 
 	 * @throws IOException
 	 */
-	public void put(InputStream inputStream, String location) throws IOException;
+	public List<DsInfo> getDatasetsToArchive(long lowArchivingLevel, long highArchivingLevel)
+			throws IOException;
 
 	/**
 	 * Return the physical path corresponding to a location for a datafile.
@@ -141,51 +168,34 @@ public interface MainStorageInterface {
 	public Path getPath(String location, String createId, String modId) throws IOException;
 
 	/**
-	 * Return the list of DsInfos which should be archived to reduce the used storage to between
-	 * lowArchivingLevel and highArchivingLevel.
+	 * Store the specified data file and return the chosen location of the file to allow it to be
+	 * retrieved.
 	 * 
-	 * A dummy implementation can be provided if no archive storage is configured with storageUnit
-	 * set to dataset
+	 * @param dsInfo
+	 *            describes the data set to which the data file should be added
+	 * @param name
+	 *            name of file within data set
+	 * @param inputStream
+	 *            stream of data to store
 	 * 
-	 * The implementaion is free to do this however it chooses. Use might be made of the information
-	 * available from the java.nio.file.FileStore (obtainable by Files.getFileStore(path) for any
-	 * file to see whether or not any action is required.
-	 * 
-	 * @param lowArchivingLevel
-	 *            don't try to reduce space below this level
-	 * @param highArchivingLevel
-	 *            if storage used is less than this return an empty list. Otherwise identify the
-	 *            list of DsInfos to get the space down to lowArchivingLevel
-	 * 
-	 * @return
+	 * @return the location of the stored data file
 	 * 
 	 * @throws IOException
 	 */
-	public List<DsInfo> getDatasetsToArchive(long lowArchivingLevel, long highArchivingLevel)
-			throws IOException;
+	public String put(DsInfo dsInfo, String name, InputStream inputStream) throws IOException;
 
 	/**
-	 * Return the list of DfInfos which should be archived to reduce the used storage to between
-	 * lowArchivingLevel and highArchivingLevel.
+	 * Store the data file at the specified location.
 	 * 
-	 * A dummy implementation can be provided if no archive storage is configured with storageUnit
-	 * set to datafile
+	 * If no archive storage is in use a dummy may be provided.
 	 * 
-	 * The implementaion is free to do this however it chooses. Use might be made of the information
-	 * available from the java.nio.file.FileStore (obtainable by Files.getFileStore(path) for any
-	 * file to see whether or not any action is required.
-	 * 
-	 * @param lowArchivingLevel
-	 *            don't try to reduce space below this level
-	 * @param highArchivingLevel
-	 *            if storage used is less than this return an empty list. Otherwise identify the
-	 *            list of DsInfos to get the space down to lowArchivingLevel
-	 * 
-	 * @return
+	 * @param inputStream
+	 *            stream of data to store
+	 * @param location
+	 *            where to store the file
 	 * 
 	 * @throws IOException
 	 */
-	public List<DfInfo> getDatafilesToArchive(long lowArchivingLevel, long highArchivingLevel)
-			throws IOException;
+	public void put(InputStream inputStream, String location) throws IOException;
 
 }

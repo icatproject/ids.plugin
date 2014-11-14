@@ -14,7 +14,7 @@ public abstract class MainStorageWithoutArchiveReadOnly extends MainStorageWitho
 	 * This is a dummy implementation
 	 */
 	@Override
-	public void delete(String location) throws IOException {
+	public void delete(String location, String createId, String modId) throws IOException {
 		throw new IOException("Please add \"readOnly\" to the ids.properties file");
 	}
 

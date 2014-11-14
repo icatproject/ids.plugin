@@ -8,7 +8,7 @@ import java.nio.file.Path;
 public class MainStorageWithoutArchiveImpl extends MainStorageWithoutArchive {
 
 	@Override
-	public void delete(String location) throws IOException {
+	public void delete(String location, String createId, String modId) throws IOException {
 	}
 
 	@Override

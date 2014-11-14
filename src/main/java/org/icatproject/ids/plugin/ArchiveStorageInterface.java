@@ -26,8 +26,6 @@ public interface ArchiveStorageInterface {
 	 * Remove the data file from the specified location. A non-dummy version is needed if
 	 * StorageUnit is DATAFILE.
 	 * 
-	 * @param inputStream
-	 *            stream of data to store
 	 * @param location
 	 *            where to store the file
 	 * 
@@ -71,7 +69,7 @@ public interface ArchiveStorageInterface {
 	 * 
 	 * @throws IOException
 	 */
-	public void put(InputStream is, String location) throws IOException;
+	public void put(InputStream inputStream, String location) throws IOException;
 
 	/**
 	 * Restore the datafiles from archive to main storage. Note that this does no throw any
@@ -86,8 +84,9 @@ public interface ArchiveStorageInterface {
 	 * 
 	 * @return setof DfInfo objects which could not be restored
 	 * 
-	 * @throws IOException 
+	 * @throws IOException
 	 */
-	public Set<DfInfo> restore(MainStorageInterface mainStorageInterface, List<DfInfo> dfInfos) throws IOException;
+	public Set<DfInfo> restore(MainStorageInterface mainStorageInterface, List<DfInfo> dfInfos)
+			throws IOException;
 
 }

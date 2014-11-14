@@ -49,7 +49,7 @@ public class MainStorageReadOnlyImpl extends MainStorageReadOnly {
 	}
 
 	@Override
-	public void delete(String location) throws IOException {
+	public void delete(String location, String createId, String modId) throws IOException {
 	}
 
 }
