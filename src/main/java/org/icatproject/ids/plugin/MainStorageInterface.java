@@ -103,7 +103,8 @@ public interface MainStorageInterface {
 	 * 
 	 * The implementaion is free to do this however it chooses. Use might be made of the information
 	 * available from the java.nio.file.FileStore (obtainable by Files.getFileStore(path) for any
-	 * file to see whether or not any action is required.
+	 * file to see whether or not any action is required. For each DfInfo returned the IDS will find
+	 * all datafiles which match all the fields that are not null in the DfInfo.
 	 * 
 	 * @param lowArchivingLevel
 	 *            don't try to reduce space below this level
@@ -127,7 +128,8 @@ public interface MainStorageInterface {
 	 * 
 	 * The implementaion is free to do this however it chooses. Use might be made of the information
 	 * available from the java.nio.file.FileStore (obtainable by Files.getFileStore(path) for any
-	 * file to see whether or not any action is required.
+	 * file to see whether or not any action is required. For each DsInfo returned the IDS will find
+	 * all datasets which match all the fields that are not null in the DsInfo.
 	 * 
 	 * @param lowArchivingLevel
 	 *            don't try to reduce space below this level
