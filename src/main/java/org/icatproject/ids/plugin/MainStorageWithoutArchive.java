@@ -31,16 +31,6 @@ public abstract class MainStorageWithoutArchive implements MainStorageInterface 
 	}
 
 	/**
-	 * This is a dummy implementation
-	 * 
-	 * @throws IOException
-	 */
-	@Override
-	public boolean exists(String location) throws IOException {
-		throw new IOException("Please do not request an archive plugin in the ids.properties file");
-	}
-
-	/**
 	 * This is a dummy implementation - only used when a file is restored from archive so the
 	 * Datafile.location field in ICAT is already known.
 	 * 

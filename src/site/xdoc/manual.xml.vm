@@ -97,6 +97,13 @@
             </li>
             <li>You can use UUIDs in the location that the “put” call generates to make the value unguessable.
             </li>
+            <li>
+                You can add uniqueness contraints on the Datafile.location in the database, using the following SQL statement:
+                <code>ALTER TABLE DATAFILE ADD CONSTRAINT UNQ_DATAFILE_LOCATION UNIQUE (LOCATION)</code>
+                with a further similar statement if you wish to avoid duplicate Dataset.location values. Note however that since these constraints are
+                only enforced at the database level and not known to ICAT, you will get an INTERNAL error "Unexpected DB response" rather then an
+                OBJECT_ALREADY_EXISTS error in the case of a violation.
+            </li>
         </ul>
 
     </body>

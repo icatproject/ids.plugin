@@ -62,8 +62,8 @@ public interface MainStorageInterface {
 	/**
 	 * See if the data file exists.
 	 * 
-	 * A dummy implementation can be provided if no archive storage is configured with storageUnit
-	 * set to datafile
+	 * A dummy may be provided if the readOnly flag is set and no archive storage has been
+	 * configured with storageUnit = DATAFILE
 	 * 
 	 * @param location
 	 *            the value from datafile.location
