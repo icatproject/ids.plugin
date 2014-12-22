@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.icatproject</groupId>
     <artifactId>ids.plugin</artifactId>
-    <version>1.3.0</version>
+    <version>1.3.1-SNAPSHOT</version>
     <name>IDS Plugin</name>
 
     <properties>
@@ -30,9 +30,9 @@
     </issueManagement>
 
     <scm>
-        <connection>scm:svn:http://icat-data-service.googlecode.com/svn/plugin/tags/ids.plugin-1.3.0</connection>
-        <developerConnection>scm:svn:https://icat-data-service.googlecode.com/svn/plugin/tags/ids.plugin-1.3.0</developerConnection>
-        <url>http://code.google.com/p/icat-data-service/source/browse/#svn%2Fplugin%2Ftrunk/tags/ids.plugin-1.3.0</url>
+        <connection>scm:svn:http://icat-data-service.googlecode.com/svn/plugin/trunk</connection>
+        <developerConnection>scm:svn:https://icat-data-service.googlecode.com/svn/plugin/trunk</developerConnection>
+        <url>http://code.google.com/p/icat-data-service/source/browse/#svn%2Fplugin%2Ftrunk</url>
     </scm>
 
     <licenses>
