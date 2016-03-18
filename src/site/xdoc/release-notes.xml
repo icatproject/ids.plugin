@@ -1,49 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
 
-    <properties>
-        <title>IDS Plugin Release Notes</title>
-    </properties>
+	<properties>
+		<title>IDS Plugin Release Notes</title>
+	</properties>
 
-    <body>
-        <section name="1.3.0">
-            <p>Added new calls to support archive storage by datafile rather than dataset.</p>
-            <li>New calls delete(DsInfo dsinfo) on ArchiveStorageInterface</li>
-            <li>Added createId and modId arguments to delete(String location) in MainStorageInterface</li>
-        </section>
+	<body>
 
-        <section name="1.2.0">
-            <p>Three more operations required by the MainStorageInterface. Also a new MainStorageReadOnly class is
-                provided.
-            </p>
-            <ul>
-                <li>getUsedSpace has been added</li>
-                <li>getInvestigations has been added </li>
-                <li>getDatasets has been added</li>
-                <li>MainStorageReadOnly class provided with dummy implementations of those operations not needed when the readOnly flag has been set
-                    in the ids.properties file
-                </li>
-                <li>The get method for the ArchiveStorageInterface now writes to a file rather than returning a stream.</li>
-            </ul>
-        </section>
+		<section name="1.3.1">
+			<p>Remove dependency upon icat.client</p>
+		</section>
 
-        <section name="1.1.0">
-            <p>ZipMapperInterface provided and extra dataset information available via the DsInfo interface
-            </p>
-            <ul>
-                <li>DsInfo now provides Dataset.location</li>
-                <li>DfInfo now has getCreateId() and getModId() rather than getCreator()</li>
-                <li>A ZipMapperInterface has been added</li>
-                <li>The get call of the MainStorageInterface now has the signature: "String location, String createId, String modId" so that you can
-                    access both the modId and the createId.
-                </li>
-            </ul>
-        </section>
+		<section name="1.3.0">
+			<p>Added new calls to support archive storage by datafile rather than
+				dataset.</p>
+			<li>New calls delete(DsInfo dsinfo) on ArchiveStorageInterface</li>
+			<li>Added createId and modId arguments to delete(String location) in
+				MainStorageInterface</li>
+		</section>
 
-        <section name="1.0.0">
-            <p>Initial public release.
-            </p>
-        </section>
+		<section name="1.2.0">
+			<p>Three more operations required by the MainStorageInterface. Also a
+				new MainStorageReadOnly class is
+				provided.
+			</p>
+			<ul>
+				<li>getUsedSpace has been added</li>
+				<li>getInvestigations has been added </li>
+				<li>getDatasets has been added</li>
+				<li>MainStorageReadOnly class provided with dummy implementations of
+					those operations not needed when the readOnly flag has been set
+					in the ids.properties file
+				</li>
+				<li>The get method for the ArchiveStorageInterface now writes to a
+					file rather than returning a stream.</li>
+			</ul>
+		</section>
 
-    </body>
+		<section name="1.1.0">
+			<p>ZipMapperInterface provided and extra dataset information
+				available via the DsInfo interface
+			</p>
+			<ul>
+				<li>DsInfo now provides Dataset.location</li>
+				<li>DfInfo now has getCreateId() and getModId() rather than
+					getCreator()</li>
+				<li>A ZipMapperInterface has been added</li>
+				<li>The get call of the MainStorageInterface now has the signature:
+					"String location, String createId, String modId" so that you can
+					access both the modId and the createId.
+				</li>
+			</ul>
+		</section>
+
+		<section name="1.0.0">
+			<p>Initial public release.
+			</p>
+		</section>
+
+	</body>
 </document>
