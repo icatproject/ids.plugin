@@ -1,5 +1,8 @@
 package org.icatproject.ids.plugin;
 
+/**
+ * Information about an ICAT data file
+ */
 public interface DfInfo {
 
 	/**

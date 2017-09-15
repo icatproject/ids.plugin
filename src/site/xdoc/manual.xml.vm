@@ -1,111 +1,125 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+<document xmlns="http://maven.apache.org/XDOC/2.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
 
-    <properties>
-        <title>IDS Plugin Interface</title>
-    </properties>
+<properties>
+<title>IDS Plugin Interface</title>
+</properties>
 
-    <body>
+<body>
 
-        <section name="The interface">
-            <p>
-                IDS plugins have three interfaces to implement. Please see the
-                <a href="apidocs/index.html">Javadoc</a>
-                for details. The IDS has a two level storage model with main storage and an optional archive storage. The main storage deals with
-                individual data files whereas the archive storage deals with zip files holding all the datafiles of a dataset. In addition the
-                ZipMapperInterface must be implemented to define the structure of the Zip file which is used for downloads and for archive storage.
-            </p>
+	<section name="The interface">
+		<p>
+			IDS plugins have three interfaces to implement. Please see the <a
+				href="apidocs/index.html">Javadoc</a> for details. The IDS has a two
+			level storage model with main storage and an optional archive
+			storage. The main storage deals with individual data files whereas
+			the archive storage deals with zip files holding all the datafiles of
+			a dataset. In addition the ZipMapperInterface must be implemented to
+			define the structure of the Zip file which is used for downloads and
+			for archive storage.
+		</p>
 
 
-            <p>
-                There are a number of abstract partial implementations provided - for example
-                <a href="apidocs/org/icatproject/ids/plugin/MainStorageWithoutArchive.html">MainStorageWithoutArchive</a>
-                and
-                <a href="apidocs/org/icatproject/ids/plugin/MainStorageWithoutArchiveReadOnly.html">MainStorageWithoutArchiveReadOnly</a>
-                which you may extend. These provide dummy implementations of calls which are not made in specific deployments.
-            </p>
+		<p>
+			There are a number of abstract partial implementations provided - for
+			example <a
+				href="apidocs/org/icatproject/ids/plugin/MainStorageWithoutArchive.html">MainStorageWithoutArchive</a>
+			and <a
+				href="apidocs/org/icatproject/ids/plugin/MainStorageWithoutArchiveReadOnly.html">MainStorageWithoutArchiveReadOnly</a>
+			which you may extend. These provide dummy implementations of calls
+			which are not made in specific deployments.
+		</p>
 
-        </section>
+	</section>
 
-        <section name="Packaging">
-            <p>
-                For Glassfish deployment the IDS expects to find its plugins in lib/applibs below the domain directory. The plugins must be packaged
-                will all dependencies - because of the way the Glassfish classloader works and after deployment Glassfish must be redeployed. Please
-                see the
-                <a href="/mvn/site/ids/storage_file">file storage plugin</a>
-                as an example of how to do it.
-            </p>
-        </section>
+	<section name="Packaging">
+		<p>
+			For Glassfish deployment the IDS expects to find its plugins in
+			lib/applibs below the domain directory. The plugins must be packaged
+			will all dependencies - because of the way the Glassfish classloader
+			works and after deployment Glassfish must be redeployed. Please see
+			the <a href="http://repo.icatproject.org/site/ids/storage_file">file
+				storage plugin</a> with <a
+				href="https://github.com/icatproject/ids.storage_file">source
+				code</a> as an example of how to do it.
+		</p>
+	</section>
 
-        <section name="Security considerations" />
-        <p>When writing a plugin you have to provide methods that operate on your data: read it, check for its existence, write it, delete it and find
-            information about it.
-        </p>
+	<section name="Security considerations" />
+	<p>When writing a plugin you have to provide methods that operate
+		on your data: read it, check for its existence, write it, delete it
+		and find information about it.</p>
 
-        <p>
-            The call put(DsInfo dsInfo, String name, InputStream inputStream) in the
-            <a href="apidocs/org/icatproject/ids/plugin/MainStorageInterface.html">MainStorageInterface</a>
-            is where you decide, using information about the data set that will hold the datafile and the name to be given to the datafile, a
-            "location"
-            value which is unique for your IDS instance and which can be used as an identifier to store and retrieve files. It will be some
-            kind of
-            path relative to the storage system you are using. The main danger is that someone will create a datafile object which has a
-            location
-            value which is not consistent with the policy you have defined in this "put" method. Such a location may cause data to be read
-            that should
-            be private or it could cause other people's data to be written or deleted.
-        </p>
+	<p>
+		The call put(DsInfo dsInfo, String name, InputStream inputStream) in
+		the <a
+			href="apidocs/org/icatproject/ids/plugin/MainStorageInterface.html">MainStorageInterface</a>
+		is where you decide, using information about the data set that will
+		hold the datafile and the name to be given to the datafile, a
+		"location" value which is unique for your IDS instance and which can
+		be used as an identifier to store and retrieve files. It will be some
+		kind of path relative to the storage system you are using. The main
+		danger is that someone will create a datafile object which has a
+		location value which is not consistent with the policy you have
+		defined in this "put" method. Such a location may cause data to be
+		read that should be private or it could cause other people's data to
+		be written or deleted.
+	</p>
 
-        <subsection name="The safe simple solution" />
-        <p>The simplest way to protect against all such dangers is to enable the generation of a cryptographic hash in the ids.properties file.
-            This
-            results in the computation of a cryptographic hash which is appended to the location you return before storing the value in ICAT.
-            The hash
-            is based on the "id" of the datafile, the "location" value as seen by the plugin and a key known only to the IDS and which is
-            defined in
-            the ids.properties file. Each time the location from ICAT is passed to a plugin it is first check that the hash has the
-            expected value and
-            then the first part of the location field is passed to the plugin which will be guaranteed to be exactly what the
-            original call to the put
-            method returned. The plugin is not exposed to the hash at all. The value stored in icat is the location
-            followed by the hash separated by a
-            space. The hash value goes at the end to help with indexing in some cases.
-        </p>
+	<subsection name="The safe simple solution" />
+	<p>The simplest way to protect against all such dangers is to
+		enable the generation of a cryptographic hash in the ids.properties
+		file. This results in the computation of a cryptographic hash which is
+		appended to the location you return before storing the value in ICAT.
+		The hash is based on the "id" of the datafile, the "location" value as
+		seen by the plugin and a key known only to the IDS and which is
+		defined in the ids.properties file. Each time the location from ICAT
+		is passed to a plugin it is first check that the hash has the expected
+		value and then the first part of the location field is passed to the
+		plugin which will be guaranteed to be exactly what the original call
+		to the put method returned. The plugin is not exposed to the hash at
+		all. The value stored in icat is the location followed by the hash
+		separated by a space. The hash value goes at the end to help with
+		indexing in some cases.</p>
 
-        <subsection name="Safe but restrictive solution" />
-        <p>If for some reason you don't want to follow the solution described above there are two approaches which are also safe but restrictive:
-        </p>
-        <ul>
-            <li>You can make sure that only a few trusted people are authorized to create or update any datafile in ICAT.
-            </li>
-            <li>If you have a system without archive storage then only three plugin calls accept the location. In each case, in addition to the
-                location the
-                createId and the modId of the datafile are passed in so that the plugin can see if this was a trusted person.
-            </li>
-        </ul>
+	<subsection name="Safe but restrictive solution" />
+	<p>If for some reason you don't want to follow the solution
+		described above there are two approaches which are also safe but
+		restrictive:</p>
+	<ul>
+		<li>You can make sure that only a few trusted people are
+			authorized to create or update any datafile in ICAT.</li>
+		<li>If you have a system without archive storage then only three
+			plugin calls accept the location. In each case, in addition to the
+			location the createId and the modId of the datafile are passed in so
+			that the plugin can see if this was a trusted person.</li>
+	</ul>
 
-        <subsection name="Parts of a solution" />
-        <p>
-            If you don't want the safe solution and in addition you cannot work with the restrictions in the previous section then there are some
-            things that you can do to help make things safer:
-        </p>
-        <ul>
-            <li>You can check that the location does not try to get outside the storage area and that it conforms to your rules by matching the
-                location against a suitable regular expression.
-            </li>
-            <li>You can make sure that write operations will not overwrite existing files (for main storage)
-            </li>
-            <li>You can use UUIDs in the location that the “put” call generates to make the value unguessable.
-            </li>
-            <li>
-                You can add uniqueness contraints on the Datafile.location in the database, using the following SQL statement:
-                <code>ALTER TABLE DATAFILE ADD CONSTRAINT UNQ_DATAFILE_LOCATION UNIQUE (LOCATION)</code>
-                with a further similar statement if you wish to avoid duplicate Dataset.location values. Note however that since these constraints are
-                only enforced at the database level and not known to ICAT, you will get an INTERNAL error "Unexpected DB response" rather then an
-                OBJECT_ALREADY_EXISTS error in the case of a violation.
-            </li>
-        </ul>
+	<subsection name="Parts of a solution" />
+	<p>If you don't want the safe solution and in addition you cannot
+		work with the restrictions in the previous section then there are some
+		things that you can do to help make things safer:</p>
+	<ul>
+		<li>You can check that the location does not try to get outside
+			the storage area and that it conforms to your rules by matching the
+			location against a suitable regular expression.</li>
+		<li>You can make sure that write operations will not overwrite
+			existing files (for main storage)</li>
+		<li>You can use UUIDs in the location that the “put” call
+			generates to make the value unguessable.</li>
+		<li>You can add uniqueness contraints on the Datafile.location in
+			the database, using the following SQL statement: <code>ALTER
+				TABLE DATAFILE ADD CONSTRAINT UNQ_DATAFILE_LOCATION UNIQUE
+				(LOCATION)</code> with a further similar statement if you wish to avoid
+			duplicate Dataset.location values. Note however that since these
+			constraints are only enforced at the database level and not known to
+			ICAT, you will get an INTERNAL error "Unexpected DB response" rather
+			then an OBJECT_ALREADY_EXISTS error in the case of a violation.
+		</li>
+	</ul>
 
-    </body>
+</body>
 </document>
-            
+

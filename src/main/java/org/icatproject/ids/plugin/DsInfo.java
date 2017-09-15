@@ -2,7 +2,6 @@ package org.icatproject.ids.plugin;
 
 /**
  * Information about an ICAT data set
- * 
  */
 public interface DsInfo {
 
