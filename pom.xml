@@ -1,41 +1,37 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.icatproject</groupId>
 	<artifactId>ids.plugin</artifactId>
 	<version>1.3.2-SNAPSHOT</version>
 	<name>IDS Plugin</name>
+	<description>IDS Plugin Interface and Utilities</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<repoUrl>http://www.icatproject.org/mvn/repo</repoUrl>
 		<project.scm.id>github</project.scm.id>
+		<gitUrl>https://github.com/icatproject/ids.plugin</gitUrl>
 	</properties>
 
-	<distributionManagement>
-		<downloadUrl>http://www.icatproject.org/mvn/repo</downloadUrl>
-		<site>
-			<id>website</id>
-			<url>scp://www.icatproject.org/var/www/html/mvn/site/ids/plugin/${project.version}</url>
-		</site>
+	<repositories>
 		<repository>
-			<id>repo</id>
-			<url>scp://www.icatproject.org/var/www/html/mvn/repo</url>
+			<id>ICAT Repo</id>
+			<url>https://repo.icatproject.org/repo</url>
 		</repository>
-	</distributionManagement>
-
-	<description>IDS Plugin Interface and Utilities</description>
-	<issueManagement>
-		<url>https://github.com/icatproject/ids.plugin/issues</url>
-		<system>GitHub</system>
-	</issueManagement>
+	</repositories>
 
 	<scm>
-		<connection>scm:git:https://github.com/icatproject/ids.plugin.git</connection>
-		<developerConnection>scm:git:https://github.com/icatproject/ids.plugin.git</developerConnection>
-		<url>https://github.com/icatproject/ids.plugin</url>
-	  <tag>HEAD</tag>
-  </scm>
+		<connection>scm:git:${gitUrl}.git</connection>
+		<developerConnection>scm:git:${gitUrl}.git</developerConnection>
+		<url>${gitUrl}</url>
+		<tag>HEAD</tag>
+	</scm>
+
+	<issueManagement>
+		<url>${gitUrl}/issues</url>
+		<system>GitHub</system>
+	</issueManagement>
 
 	<licenses>
 		<license>
@@ -46,20 +42,31 @@
 
 	<organization>
 		<name>The ICAT Collaboration</name>
-		<url>http://www.icatproject.org</url>
+		<url>https://www.icatproject.org</url>
 	</organization>
 
-	<repositories>
+	<distributionManagement>
+		<downloadUrl>${repoUrl}</downloadUrl>
+		<site>
+			<id>repo.icatproject.org</id>
+			<url>dav:https://repo.icatproject.org/site/ids/plugin/${project.version}</url>
+		</site>
 		<repository>
-			<id>ICAT Repo</id>
-			<url>http://www.icatproject.org/mvn/repo</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
+			<id>repo.icatproject.org</id>
+			<url>dav:${repoUrl}</url>
 		</repository>
-	</repositories>
+	</distributionManagement>
 
 	<build>
+
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-webdav-jackrabbit</artifactId>
+				<version>2.10</version>
+			</extension>
+		</extensions>
+
 		<plugins>
 
 			<plugin>
@@ -106,8 +113,6 @@
 					<tagNameFormat>v@{project.version}</tagNameFormat>
 				</configuration>
 			</plugin>
-
-
 
 		</plugins>
 

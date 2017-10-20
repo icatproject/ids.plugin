@@ -7,61 +7,71 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * An IDS interface which for which an implementation must be provided for an IDS deployment with
- * archive storage.
+ * An IDS interface which for which an implementation must be provided for an
+ * IDS deployment with archive storage.
  */
 public interface ArchiveStorageInterface {
 
 	/**
-	 * Delete the specified data set. A non-dummy version is needed if StorageUnit is DATASET.
-	 * Implementations must not throw an error if the data set does not exist in the storage.
+	 * Delete the specified data set. A non-dummy version is needed if
+	 * StorageUnit is DATASET.
+	 * Implementations must not throw an error if the data set does
+	 * not exist in the storage.
 	 * 
 	 * @param dsInfo
 	 *            describes the data set
 	 * 
 	 * @throws IOException
+	 *             to indicate failure
 	 */
 	public void delete(DsInfo dsInfo) throws IOException;
 
 	/**
-	 * Remove the data file from the specified location. A non-dummy version is needed if
-	 * StorageUnit is DATAFILE.
+	 * Remove the data file from the specified location. A non-dummy version is
+	 * needed if StorageUnit is DATAFILE.
 	 * 
 	 * @param location
 	 *            where to store the file
 	 * 
 	 * @throws IOException
+	 *             to indicate failure
 	 */
 	public void delete(String location) throws IOException;
 
 	/**
-	 * Get the specified data set. A non-dummy version is needed if StorageUnit is DATASET.
+	 * Get the specified data set. A non-dummy version is needed if StorageUnit
+	 * is DATASET.
 	 * 
 	 * @param dsInfo
 	 *            describes the data set
 	 * 
 	 * @param path
-	 *            path of the file to write to (it will be overwritten if it already exists)
+	 *            path of the file to write to (it will be overwritten if it
+	 *            already exists)
 	 * 
 	 * @throws IOException
+	 *             to indicate failure
 	 */
 	public void get(DsInfo dsInfo, Path path) throws IOException;
 
 	/**
-	 * Store the specified data set. A non-dummy version is needed if StorageUnit is DATASET.
+	 * Store the specified data set. A non-dummy version is needed if
+	 * StorageUnit is DATASET.
 	 * 
 	 * @param dsInfo
 	 *            describes the data set
 	 * 
 	 * @param inputStream
+	 *            stream of data to store
 	 * 
 	 * @throws IOException
+	 *             to indicate failure
 	 */
 	public void put(DsInfo dsInfo, InputStream inputStream) throws IOException;
 
 	/**
-	 * Store the data file at the specified location. A non-dummy version is needed if StorageUnit
-	 * is DATAFILE.
+	 * Store the data file at the specified location. A non-dummy version is
+	 * needed if StorageUnit is DATAFILE.
 	 * 
 	 * @param inputStream
 	 *            stream of data to store
@@ -69,13 +79,17 @@ public interface ArchiveStorageInterface {
 	 *            where to store the file
 	 * 
 	 * @throws IOException
+	 *             to indicate failure
 	 */
 	public void put(InputStream inputStream, String location) throws IOException;
 
 	/**
-	 * Restore the datafiles from archive to main storage. Note that this does no throw any
-	 * exceptions but will return a set of failed DfInfo objects. A non-dummy version is needed if
-	 * StorageUnit is DATAFILE.
+	 * Restore the datafiles from archive to main storage. Note that this is not
+	 * expected to throw any exceptions but will return a set of failed DfInfo
+	 * objects. A non-dummy version is needed if StorageUnit is DATAFILE. The
+	 * implementation is expected to make use of @see
+	 * {@link MainStorageInterface#put(InputStream,String location)} to store
+	 * the datafiles into main storage.
 	 * 
 	 * @param mainStorageInterface
 	 *            the main storage interface to write restored files to
@@ -84,10 +98,7 @@ public interface ArchiveStorageInterface {
 	 *            list of DfInfo objects
 	 * 
 	 * @return setof DfInfo objects which could not be restored
-	 * 
-	 * @throws IOException
 	 */
-	public Set<DfInfo> restore(MainStorageInterface mainStorageInterface, List<DfInfo> dfInfos)
-			throws IOException;
+	public Set<DfInfo> restore(MainStorageInterface mainStorageInterface, List<DfInfo> dfInfos);
 
 }
