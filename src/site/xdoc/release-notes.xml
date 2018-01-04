@@ -20,10 +20,12 @@
 			<p>Added new calls to support archive storage by datafile rather than
 				dataset.
 			</p>
-			<li>New calls delete(DsInfo dsinfo) on ArchiveStorageInterface</li>
-			<li>Added createId and modId arguments to delete(String location) in
-				MainStorageInterface
-			</li>
+			<ul>
+				<li>New calls delete(DsInfo dsinfo) on ArchiveStorageInterface</li>
+				<li>Added createId and modId arguments to delete(String location) in
+					MainStorageInterface
+				</li>
+			</ul>
 		</section>
 
 		<section name="1.2.0">
