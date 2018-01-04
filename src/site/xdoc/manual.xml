@@ -69,20 +69,20 @@
 			<p>
 
 				The simplest way to protect against all such dangers is to
-				enable the generation of a cryptographic hash in the
-				ids.properties file.  This results in the computation of a
-				cryptographic hash which is appended to the location you return
-				before storing the value in ICAT.  The hash is based on the "id"
-				of the datafile, the "location" value as seen by the plugin and
-				a key known only to the IDS and which is defined in the
-				ids.properties file.  Each time the location from ICAT is passed
-				to a plugin it is first check that the hash has the expected
-				value and then the first part of the location field is passed to
-				the plugin which will be guaranteed to be exactly what the
-				original call to the put method returned.  The plugin is not
-				exposed to the hash at all.  The value stored in icat is the
-				location followed by the hash separated by a space.  The hash
-				value goes at the end to help with indexing in some cases.
+				enable the generation of a cryptographic hash in ids.server.
+				This results in the computation of a cryptographic hash which is
+				appended to the location you return before storing the value in
+				ICAT.  The hash is based on the "id" of the datafile, the
+				"location" value as seen by the plugin and a key known only to
+				the IDS and which is defined in the run.properties file.  Each
+				time the location from ICAT is passed to a plugin it is first
+				check that the hash has the expected value and then the first
+				part of the location field is passed to the plugin which will be
+				guaranteed to be exactly what the original call to the put
+				method returned.  The plugin is not exposed to the hash at all.
+				The value stored in icat is the location followed by the hash
+				separated by a space.  The hash value goes at the end to help
+				with indexing in some cases.
 			</p>
 		</subsection>
 
