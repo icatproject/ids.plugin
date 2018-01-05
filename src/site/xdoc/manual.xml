@@ -27,7 +27,8 @@
 			example <a href="apidocs/org/icatproject/ids/plugin/MainStorageWithoutArchive.html">MainStorageWithoutArchive</a>
 			and <a href="apidocs/org/icatproject/ids/plugin/MainStorageWithoutArchiveReadOnly.html">MainStorageWithoutArchiveReadOnly</a>
 			which you may extend.  These provide dummy implementations of calls
-			which are not made in specific deployments.
+			which are not made in specific deployments, see
+			<a href="#ids-deployment">below</a>.
 		</p>
 
 	</section>
@@ -41,6 +42,206 @@
 			<a href="http://repo.icatproject.org/site/ids/storage_file">file storage plugin</a>
 			with <a href="https://github.com/icatproject/ids.storage_file">source code</a>
 			as an example of how to do it.
+		</p>
+	</section>
+
+	<section name="IDS deployment options" id="ids-deployment">
+		<p>
+			Depending on the properties defined during ids.server deployment, only a
+			subset of the methods defined in the storage interfaces may need to be
+			implemented for real.  In specific deployments, some of the calls will
+			never be made and may therefore be provided by a dummy implementation,
+			which in general should just throw an error.  The following table shows
+			which methods are needed in which deployments:
+		</p>
+
+		<table>
+			<tr>
+				<td>readOnly</td>
+				<td>false</td>
+				<td>true</td>
+				<td>false</td>
+				<td>true</td>
+				<td>false</td>
+				<td>true</td>
+			</tr>
+			<tr>
+				<td>archive storage</td>
+				<td>yes</td>
+				<td>yes</td>
+				<td>yes</td>
+				<td>yes</td>
+				<td>no</td>
+				<td>no</td>
+			</tr>
+			<tr>
+				<td>storageUnit</td>
+				<td>dataset</td>
+				<td>dataset</td>
+				<td>datafile</td>
+				<td>datafile</td>
+				<td>N/A</td>
+				<td>N/A</td>
+			</tr>
+			<tr>
+				<td><code>mainStorage.delete(DsInfo)</code></td>
+				<td>&#x2714;</td>
+				<td>&#x2714;</td>
+				<td>&#x274C;</td>
+				<td>&#x274C;</td>
+				<td>&#x274C;</td>
+				<td>&#x274C;</td>
+			</tr>
+			<tr>
+				<td><code>mainStorage.delete(String, String, String)</code></td>
+				<td>&#x2714;</td>
+				<td>&#x274C;</td>
+				<td>&#x2714;</td>
+				<td>&#x2714;</td>
+				<td>&#x2714;</td>
+				<td>&#x274C;</td>
+			</tr>
+			<tr>
+				<td><code>mainStorage.exists(DsInfo)</code></td>
+				<td>&#x2714;</td>
+				<td>&#x2714;</td>
+				<td>&#x274C;</td>
+				<td>&#x274C;</td>
+				<td>&#x274C;</td>
+				<td>&#x274C;</td>
+			</tr>
+			<tr>
+				<td><code>mainStorage.exists(String)</code></td>
+				<td>&#x2714;</td>
+				<td>&#x274C;</td>
+				<td>&#x2714;</td>
+				<td>&#x2714;</td>
+				<td>&#x2714;</td>
+				<td>&#x274C;</td>
+			</tr>
+			<tr>
+				<td><code>mainStorage.get(String, String, String)</code></td>
+				<td>&#x2714;</td>
+				<td>&#x2714;</td>
+				<td>&#x2714;</td>
+				<td>&#x2714;</td>
+				<td>&#x2714;</td>
+				<td>&#x2714;</td>
+			</tr>
+			<tr>
+				<td><code>mainStorage.getDatafilesToArchive(long, long)</code></td>
+				<td>&#x274C;</td>
+				<td>&#x274C;</td>
+				<td>&#x2714;</td>
+				<td>&#x2714;</td>
+				<td>&#x274C;</td>
+				<td>&#x274C;</td>
+			</tr>
+			<tr>
+				<td><code>mainStorage.getDatasetsToArchive(long, long)</code></td>
+				<td>&#x2714;</td>
+				<td>&#x2714;</td>
+				<td>&#x274C;</td>
+				<td>&#x274C;</td>
+				<td>&#x274C;</td>
+				<td>&#x274C;</td>
+			</tr>
+			<tr>
+				<td><code>mainStorage.getPath(String, String, String)</code></td>
+				<td colspan="6" align="center">if link enabled</td>
+			</tr>
+			<tr>
+				<td><code>mainStorage.put(DsInfo, String, InputStream)</code></td>
+				<td>&#x2714;</td>
+				<td>&#x274C;</td>
+				<td>&#x2714;</td>
+				<td>&#x274C;</td>
+				<td>&#x2714;</td>
+				<td>&#x274C;</td>
+			</tr>
+			<tr>
+				<td><code>mainStorage.put(InputStream, String)</code></td>
+				<td>&#x2714;</td>
+				<td>&#x2714;</td>
+				<td>&#x2714;</td>
+				<td>&#x2714;</td>
+				<td>&#x274C;</td>
+				<td>&#x274C;</td>
+			</tr>
+			<tr>
+				<td><code>archiveStorage.delete(DsInfo)</code></td>
+				<td>&#x2714;</td>
+				<td>&#x274C;</td>
+				<td>&#x274C;</td>
+				<td>&#x274C;</td>
+				<td rowspan="6" colspan="2" align="center" valign="middle">N/A</td>
+			</tr>
+			<tr>
+				<td><code>archiveStorage.delete(String)</code></td>
+				<td>&#x274C;</td>
+				<td>&#x274C;</td>
+				<td>&#x2714;</td>
+				<td>&#x274C;</td>
+			</tr>
+			<tr>
+				<td><code>archiveStorage.get(DsInfo, Path)</code></td>
+				<td>&#x2714;</td>
+				<td>&#x2714;</td>
+				<td>&#x274C;</td>
+				<td>&#x274C;</td>
+			</tr>
+			<tr>
+				<td><code>archiveStorage.put(DsInfo, InputStream)</code></td>
+				<td>&#x2714;</td>
+				<td>&#x274C;</td>
+				<td>&#x274C;</td>
+				<td>&#x274C;</td>
+			</tr>
+			<tr>
+				<td><code>archiveStorage.put(InputStream, String)</code></td>
+				<td>&#x274C;</td>
+				<td>&#x274C;</td>
+				<td>&#x2714;</td>
+				<td>&#x274C;</td>
+			</tr>
+			<tr>
+				<td><code>archiveStorage.restore(MainStorageInterface, List&lt;DfInfo&gt;)</code></td>
+				<td>&#x274C;</td>
+				<td>&#x274C;</td>
+				<td>&#x2714;</td>
+				<td>&#x2714;</td>
+			</tr>
+		</table>
+
+		<p>
+			The first three rows list the relevant options for the deployment, see
+			the documentation on the run.properties file in the ids.server
+			installation guide.  Here, the meaning is:
+		</p>
+		<ul>
+			<li>readOnly: the corresponding value in run.properties</li>
+			<li>archive storage: whether plugin.archive.class is set</li>
+			<li>storageUnit: the corresponding value in run.properties.  This is only
+			    relevant if archive storage is used</li>
+			<li>link enabled: whether linkLifetimeSeconds has a value greater then
+			    zero.  This is a special case as it is independent of all other
+			    options and only relevant for the 
+			    <code>mainStorage.getPath(String, String, String)</code> method.</li>
+		</ul>
+
+		<p>
+			The remaining rows list the methods defined in the main storage and in
+			the archive storage interface.  Each column indicates whether this method
+			will be called in a deployment having the corresponding options in the
+			first three rows of the same column set.
+		</p>
+
+		<p>
+			In the table, it was assumed that the 
+			<code>restore(MainStorageInterface, List&lt;DfInfo&gt;)</code> method in
+			the archive storage plugin&#x2014;if present&#x2014;only calls
+			<code>put(InputStream, String)</code> on the main storage.  If it also
+			makes other calls, these need to be implemented as well of course.
 		</p>
 	</section>
 
