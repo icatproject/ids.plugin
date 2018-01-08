@@ -21,28 +21,6 @@
 			storage.
 		</p>
 
-
-		<p>
-			There are a number of abstract partial implementations provided - for
-			example <a href="apidocs/org/icatproject/ids/plugin/MainStorageWithoutArchive.html">MainStorageWithoutArchive</a>
-			and <a href="apidocs/org/icatproject/ids/plugin/MainStorageWithoutArchiveReadOnly.html">MainStorageWithoutArchiveReadOnly</a>
-			which you may extend.  These provide dummy implementations of calls
-			which are not made in specific deployments, see
-			<a href="#ids-deployment">below</a>.
-		</p>
-
-	</section>
-
-	<section name="Packaging">
-		<p>
-			For Glassfish deployment the IDS expects to find its plugins in
-			lib/applibs below the domain directory.  The plugins must be packaged
-			will all dependencies - because of the way the Glassfish classloader
-			works and after deployment Glassfish must be redeployed.  Please see the
-			<a href="http://repo.icatproject.org/site/ids/storage_file">file storage plugin</a>
-			with <a href="https://github.com/icatproject/ids.storage_file">source code</a>
-			as an example of how to do it.
-		</p>
 	</section>
 
 	<section name="IDS deployment options" id="ids-deployment">
@@ -243,6 +221,17 @@
 			<code>put(InputStream, String)</code> on the main storage.  If it also
 			makes other calls, these need to be implemented as well of course.
 		</p>
+
+
+		<p>
+			There are a two abstract implementations provided, 
+			<a href="apidocs/org/icatproject/ids/plugin/AbstractMainStorage.html">AbstractMainStorage</a>
+			and <a href="apidocs/org/icatproject/ids/plugin/AbstractArchiveStorage.html">AbstractArchiveStorage</a>.
+			These provide dummy implementations of calls which are not made in
+			specific deployments.  It is recommended to extend these abstract
+			classes and to implement those methods that are needed for the
+			deployments that the plugin is intended to support.
+		</p>
 	</section>
 
 	<section name="Security considerations">
@@ -344,6 +333,18 @@
 				</li>
 			</ul>
 		</subsection>
+	</section>
+
+	<section name="Packaging">
+		<p>
+			For Glassfish deployment the IDS expects to find its plugins in
+			lib/applibs below the domain directory.  The plugins must be packaged
+			will all dependencies - because of the way the Glassfish classloader
+			works and after deployment Glassfish must be redeployed.  Please see the
+			<a href="http://repo.icatproject.org/site/ids/storage_file">file storage plugin</a>
+			with <a href="https://github.com/icatproject/ids.storage_file">source code</a>
+			as an example of how to do it.
+		</p>
 	</section>
 
 </body>
