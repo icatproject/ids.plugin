@@ -15,6 +15,8 @@ public interface ArchiveStorageInterface {
 	/**
 	 * Delete the specified data set. A non-dummy version is needed if
 	 * StorageUnit is DATASET.
+	 * Implementations must not throw an error if the data set does
+	 * not exist in the storage.
 	 * 
 	 * @param dsInfo
 	 *            describes the data set
