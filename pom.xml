@@ -12,6 +12,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<project.scm.id>github</project.scm.id>
 		<gitUrl>https://github.com/icatproject/ids.plugin</gitUrl>
+		<repoUrl>https://repo.icatproject.org/repo</repoUrl>
 	</properties>
 
 	<repositories>
