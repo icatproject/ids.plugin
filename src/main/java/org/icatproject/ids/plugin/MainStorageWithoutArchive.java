@@ -8,7 +8,10 @@ import java.util.List;
  * This is a partial implementation of a MainStorageInterface providing dummy
  * implementations of those operations not needed when no archive storage is
  * being used.
+ *
+ * This class is deprecated, use AbstractMainStorage instead.
  */
+@Deprecated
 public abstract class MainStorageWithoutArchive implements MainStorageInterface {
 
 	/**

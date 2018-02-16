@@ -6,8 +6,11 @@ import java.io.InputStream;
 /**
  * This is a partial implementation of a MainStorageInterface providing dummy implementations of
  * those operations not needed when no archive storage is being used and when the readOnly flag has
- * been set in the ids.properties file
+ * been set in the ids.properties file.
+ *
+ * This class is deprecated, use AbstractMainStorage instead.
  */
+@Deprecated
 public abstract class MainStorageWithoutArchiveReadOnly extends MainStorageWithoutArchive {
 
 	/**
