@@ -84,4 +84,13 @@ public abstract class AbstractMainStorage implements MainStorageInterface {
 		throw new IllegalStateException("This plugin does not a two level storage");
 	}
 
+	/**
+	 * This is a dummy implementation. You need to override it if you
+	 * want to support locking on the file system level.
+	 */
+	@Override
+	public AutoCloseable lock(DsInfo dsInfo, boolean shared) throws AlreadyLockedException, IOException {
+		return null;
+	}
+
 }
