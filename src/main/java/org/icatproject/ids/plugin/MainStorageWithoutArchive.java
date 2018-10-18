@@ -49,12 +49,4 @@ public abstract class MainStorageWithoutArchive implements MainStorageInterface 
 		throw new IOException("Please do not request an archive plugin in the ids.properties file");
 	}
 
-	/**
-	 * This is a dummy implementation
-	 */
-	@Override
-	public AutoCloseable lock(DsInfo dsInfo, boolean shared) throws AlreadyLockedException, IOException {
-		return null;
-	}
-
 }

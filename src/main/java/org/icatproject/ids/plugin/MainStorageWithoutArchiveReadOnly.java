@@ -37,12 +37,4 @@ public abstract class MainStorageWithoutArchiveReadOnly extends MainStorageWitho
 		throw new IOException("Please add \"readOnly\" to the ids.properties file");
 	}
 
-	/**
-	 * This is a dummy implementation
-	 */
-	@Override
-	public AutoCloseable lock(DsInfo dsInfo, boolean shared) throws AlreadyLockedException, IOException {
-		return null;
-	}
-
 }
