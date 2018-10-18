@@ -221,4 +221,24 @@ public interface MainStorageInterface {
 	 */
 	public void put(InputStream inputStream, String location) throws IOException;
 
+	/**
+	 * Place a lock on the dataset in the storage.
+	 * 
+	 * If the plugin does not support locking, a dummy implementation should return null.
+	 * 
+	 * @param dsInfo
+	 *            describes the data set to be locked
+	 * 
+	 * @param shared
+	 *            indicates whether a shared or an exclusive lock should be obtained
+	 * 
+	 * @return an AutoCloseable that releases the lock on close
+	 * 
+	 * @throws AlreadyLockedException
+	 *            if the lock cannot be obtained because the dataset is already locked
+	 * 
+	 * @throws IOException
+	 */
+	public AutoCloseable lock(DsInfo dsInfo, boolean shared) throws AlreadyLockedException, IOException;
+
 }
