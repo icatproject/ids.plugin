@@ -52,4 +52,9 @@ public class MainStorageReadOnlyImpl extends MainStorageReadOnly {
 	public void delete(String location, String createId, String modId) throws IOException {
 	}
 
+	@Override
+	public AutoCloseable lock(DsInfo dsInfo, boolean shared) throws AlreadyLockedException, IOException {
+		return null;
+	}
+
 }
