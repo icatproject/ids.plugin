@@ -222,15 +222,21 @@
 			makes other calls, these need to be implemented as well of course.
 		</p>
 
+		<p>
+			There is another optional method <code>mainStorage.lock(DsInfo,
+			boolean)</code> that is independent of the ids.server configuration.  This
+			method may be implemented if the storage plugin wants to support file system
+			locking in the storage.  Otherwise, a dummy implementation must be provided
+			that simply returns <code>null</code>.
+		</p>
 
 		<p>
 			There are a two abstract implementations provided, 
 			<a href="apidocs/org/icatproject/ids/plugin/AbstractMainStorage.html">AbstractMainStorage</a>
 			and <a href="apidocs/org/icatproject/ids/plugin/AbstractArchiveStorage.html">AbstractArchiveStorage</a>.
-			These provide dummy implementations of calls which are not made in
-			specific deployments.  It is recommended to extend these abstract
-			classes and to implement those methods that are needed for the
-			deployments that the plugin is intended to support.
+			These provide dummy implementations for all optional methods.  It is
+			recommended to extend these abstract classes and to implement those methods
+			that are needed for the deployments that the plugin is intended to support.
 		</p>
 	</section>
 
