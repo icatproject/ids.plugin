@@ -19,7 +19,7 @@ public abstract class MainStorageWithoutArchive implements MainStorageInterface 
 	 */
 	@Override
 	public void delete(DsInfo dsInfo) throws IOException {
-		throw new IOException("Please do not request an archive plugin in the ids.properties file");
+		throw new IllegalStateException("Please do not request an archive plugin in the ids.properties file");
 	}
 
 	/**
@@ -27,7 +27,7 @@ public abstract class MainStorageWithoutArchive implements MainStorageInterface 
 	 */
 	@Override
 	public boolean exists(DsInfo dsInfo) throws IOException {
-		throw new IOException("Please do not request an archive plugin in the ids.properties file");
+		throw new IllegalStateException("Please do not request an archive plugin in the ids.properties file");
 	}
 
 	/**
@@ -36,17 +36,17 @@ public abstract class MainStorageWithoutArchive implements MainStorageInterface 
 	 */
 	@Override
 	public void put(InputStream inputStream, String location) throws IOException {
-		throw new IOException("Please do not request an archive plugin in the ids.properties file");
+		throw new IllegalStateException("Please do not request an archive plugin in the ids.properties file");
 	}
 
 	@Override
 	public List<DsInfo> getDatasetsToArchive(long lowArchivingLevel, long highArchivingLevel) throws IOException {
-		throw new IOException("Please do not request an archive plugin in the ids.properties file");
+		throw new IllegalStateException("Please do not request an archive plugin in the ids.properties file");
 	}
 
 	@Override
 	public List<DfInfo> getDatafilesToArchive(long lowArchivingLevel, long highArchivingLevel) throws IOException {
-		throw new IOException("Please do not request an archive plugin in the ids.properties file");
+		throw new IllegalStateException("Please do not request an archive plugin in the ids.properties file");
 	}
 
 }

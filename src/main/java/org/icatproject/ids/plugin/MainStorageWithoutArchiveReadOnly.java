@@ -18,7 +18,7 @@ public abstract class MainStorageWithoutArchiveReadOnly extends MainStorageWitho
 	 */
 	@Override
 	public void delete(String location, String createId, String modId) throws IOException {
-		throw new IOException("Please add \"readOnly\" to the ids.properties file");
+		throw new IllegalStateException("Please add \"readOnly\" to the ids.properties file");
 	}
 
 	/**
@@ -26,7 +26,7 @@ public abstract class MainStorageWithoutArchiveReadOnly extends MainStorageWitho
 	 */
 	@Override
 	public boolean exists(String location) throws IOException {
-		throw new IOException("Please add \"readOnly\" to the ids.properties file");
+		throw new IllegalStateException("Please add \"readOnly\" to the ids.properties file");
 	}
 
 	/**
@@ -34,7 +34,7 @@ public abstract class MainStorageWithoutArchiveReadOnly extends MainStorageWitho
 	 */
 	@Override
 	public String put(DsInfo dsInfo, String name, InputStream inputStream) throws IOException {
-		throw new IOException("Please add \"readOnly\" to the ids.properties file");
+		throw new IllegalStateException("Please add \"readOnly\" to the ids.properties file");
 	}
 
 }
