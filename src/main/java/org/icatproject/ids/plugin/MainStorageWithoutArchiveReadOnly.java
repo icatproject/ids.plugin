@@ -25,7 +25,7 @@ public abstract class MainStorageWithoutArchiveReadOnly extends MainStorageWitho
 	 * This is a dummy implementation
 	 */
 	@Override
-	public boolean exists(String location) throws IOException {
+	public boolean exists(String location) {
 		throw new IllegalStateException("Please add \"readOnly\" to the ids.properties file");
 	}
 

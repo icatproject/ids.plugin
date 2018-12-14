@@ -59,11 +59,8 @@ public interface MainStorageInterface {
 	 *            describes the data set being queried
 	 * 
 	 * @return true if the data set exists
-	 * 
-	 * @throws IOException
-	 *             to indicate failure
 	 */
-	public boolean exists(DsInfo dsInfo) throws IOException;
+	public boolean exists(DsInfo dsInfo);
 
 	/**
 	 * See if the data file exists.
@@ -75,11 +72,8 @@ public interface MainStorageInterface {
 	 *            the value from datafile.location
 	 * 
 	 * @return true if the data file exists
-	 * 
-	 * @throws IOException
-	 *             to indicate failure
 	 */
-	public boolean exists(String location) throws IOException;
+	public boolean exists(String location);
 
 	/**
 	 * Return a stream of data from the specified data file

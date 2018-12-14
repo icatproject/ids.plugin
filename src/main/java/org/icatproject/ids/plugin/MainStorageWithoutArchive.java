@@ -26,7 +26,7 @@ public abstract class MainStorageWithoutArchive implements MainStorageInterface 
 	 * This is a dummy implementation
 	 */
 	@Override
-	public boolean exists(DsInfo dsInfo) throws IOException {
+	public boolean exists(DsInfo dsInfo) {
 		throw new IllegalStateException("Please do not request an archive plugin in the ids.properties file");
 	}
 
