@@ -27,7 +27,7 @@ public class MainStorageWithoutArchiveImpl extends MainStorageWithoutArchive {
 	}
 
 	@Override
-	public boolean exists(String location) throws IOException {
+	public boolean exists(String location) {
 		return false;
 	}
 
