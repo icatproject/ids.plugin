@@ -195,10 +195,14 @@ public interface MainStorageInterface {
 	 * 
 	 * @return the location of the stored data file
 	 * 
+	 * @throws IllegalArgumentException
+	 *            if the creation of the file has been refused because either
+	 *            the name or any attribute of dsinfo is not acceptable.
 	 * @throws IOException
-	 *             to indicate failure
+	 *            to indicate failure
 	 */
-	public String put(DsInfo dsInfo, String name, InputStream inputStream) throws IOException;
+	public String put(DsInfo dsInfo, String name, InputStream inputStream)
+		throws IllegalArgumentException, IOException;
 
 	/**
 	 * Store the data file at the specified location.
