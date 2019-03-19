@@ -17,7 +17,7 @@ public abstract class ArchiveStorageReadOnly implements ArchiveStorageInterface 
 	 */
 	@Override
 	public void delete(DsInfo dsInfo) throws IOException {
-		throw new IOException("Please add \"readOnly\" to the ids.properties file");
+		throw new IllegalStateException("Please add \"readOnly\" to the ids.properties file");
 	}
 
 	/**
@@ -25,7 +25,7 @@ public abstract class ArchiveStorageReadOnly implements ArchiveStorageInterface 
 	 */
 	@Override
 	public void put(DsInfo dsInfo, InputStream inputStream) throws IOException {
-		throw new IOException("Please add \"readOnly\" to the ids.properties file");
+		throw new IllegalStateException("Please add \"readOnly\" to the ids.properties file");
 	}
 
 	/**
@@ -33,7 +33,7 @@ public abstract class ArchiveStorageReadOnly implements ArchiveStorageInterface 
 	 */
 	@Override
 	public void delete(String location) throws IOException {
-		throw new IOException("Please add \"readOnly\" to the ids.properties file");
+		throw new IllegalStateException("Please add \"readOnly\" to the ids.properties file");
 	}
 
 	/**
@@ -41,7 +41,7 @@ public abstract class ArchiveStorageReadOnly implements ArchiveStorageInterface 
 	 */
 	@Override
 	public void put(InputStream is, String location) throws IOException {
-		throw new IOException("Please add \"readOnly\" to the ids.properties file");
+		throw new IllegalStateException("Please add \"readOnly\" to the ids.properties file");
 	}
 
 }
