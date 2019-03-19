@@ -8,6 +8,18 @@
 
 	<body>
 
+		<section name="1.5.0">
+			<ul>
+				<li>Add IllegalArgumentException to method
+				MainStorageInterface.put(DsInfo, String, InputStream).
+				Implementations may throw this exception if sanity checks on name or
+				dsInfo fail.  (Issue #8)</li>
+				<li>Drop IOException from the MainStorageInterface.exists() methods.
+				Dummy implementations throw IllegalStateException rather then
+				IOException.  (Issue #5)</li>
+			</ul>
+		</section>
+
 		<section name="1.4.0">
 			<ul>
 				<li>Document that ArchiveStorage.delete(DsInfo) must not throw

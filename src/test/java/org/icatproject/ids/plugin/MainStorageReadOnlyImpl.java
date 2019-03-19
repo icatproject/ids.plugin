@@ -13,12 +13,12 @@ public class MainStorageReadOnlyImpl extends MainStorageReadOnly {
 	}
 
 	@Override
-	public boolean exists(DsInfo dsInfo) throws IOException {
+	public boolean exists(DsInfo dsInfo) {
 		return false;
 	}
 
 	@Override
-	public boolean exists(String location) throws IOException {
+	public boolean exists(String location) {
 		return false;
 	}
 

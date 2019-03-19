@@ -32,7 +32,7 @@ public abstract class AbstractMainStorage implements MainStorageInterface {
 	 * This is a dummy implementation.  You need to override it if you
 	 * want to support StorageUnit DATASET.
 	 */
-	public boolean exists(DsInfo dsInfo) throws IOException {
+	public boolean exists(DsInfo dsInfo) {
 		throw new IllegalStateException("This plugin does not support StorageUnit DATASET");
 	}
 
@@ -40,7 +40,7 @@ public abstract class AbstractMainStorage implements MainStorageInterface {
 	 * This is a dummy implementation.  You need to override it if you
 	 * want to support StorageUnit DATAFILE or readOnly set to false.
 	 */
-	public boolean exists(String location) throws IOException {
+	public boolean exists(String location) {
 		throw new IllegalStateException("This plugin does not support StorageUnit DATAFILE or write enabled");
 	}
 
