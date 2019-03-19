@@ -21,7 +21,7 @@ public interface MainStorageInterface {
 	 *            describes the data set with the files to be deleted
 	 * 
 	 * @throws IOException
-	 *             to indicate failure
+	 *            to indicate failure
 	 */
 	public void delete(DsInfo dsInfo) throws IOException;
 
@@ -45,7 +45,7 @@ public interface MainStorageInterface {
 	 *            field.
 	 * 
 	 * @throws IOException
-	 *             to indicate failure
+	 *            to indicate failure
 	 */
 	public void delete(String location, String createId, String modId) throws IOException;
 
@@ -94,7 +94,7 @@ public interface MainStorageInterface {
 	 * @return input stream of data
 	 * 
 	 * @throws IOException
-	 *             to indicate failure
+	 *            to indicate failure
 	 */
 	public InputStream get(String location, String createId, String modId) throws IOException;
 
@@ -121,7 +121,7 @@ public interface MainStorageInterface {
 	 * @return list of DfInfos
 	 * 
 	 * @throws IOException
-	 *             to indicate failure
+	 *            to indicate failure
 	 */
 	public List<DfInfo> getDatafilesToArchive(long lowArchivingLevel, long highArchivingLevel) throws IOException;
 
@@ -148,7 +148,7 @@ public interface MainStorageInterface {
 	 * @return list of DsInfos
 	 * 
 	 * @throws IOException
-	 *             to indicate failure
+	 *            to indicate failure
 	 */
 	public List<DsInfo> getDatasetsToArchive(long lowArchivingLevel, long highArchivingLevel) throws IOException;
 
@@ -178,7 +178,7 @@ public interface MainStorageInterface {
 	 * @return physical path
 	 * 
 	 * @throws IOException
-	 *             to indicate failure
+	 *            to indicate failure
 	 */
 	public Path getPath(String location, String createId, String modId) throws IOException;
 
@@ -215,12 +215,16 @@ public interface MainStorageInterface {
 	 *            where to store the file
 	 * 
 	 * @throws IOException
-	 *             to indicate failure
+	 *            to indicate failure
 	 */
 	public void put(InputStream inputStream, String location) throws IOException;
 
 	/**
 	 * Place a lock on the dataset in the storage.
+	 * 
+	 * This method must not block.  If a lock can not be obtained immediately, the method
+	 * must throw AlreadyLockedException rather then waiting for the ressource to become
+	 * available.
 	 * 
 	 * If the plugin does not support locking, a dummy implementation should return null.
 	 * 
@@ -236,6 +240,7 @@ public interface MainStorageInterface {
 	 *            if the lock cannot be obtained because the dataset is already locked
 	 * 
 	 * @throws IOException
+	 *            to indicate failure
 	 */
 	public AutoCloseable lock(DsInfo dsInfo, boolean shared) throws AlreadyLockedException, IOException;
 
