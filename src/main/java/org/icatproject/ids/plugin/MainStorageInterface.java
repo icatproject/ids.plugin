@@ -14,9 +14,6 @@ public interface MainStorageInterface {
 	/**
 	 * Deletes the files of the specified data set.
 	 * 
-	 * A dummy implementation can be provided if no archive storage is
-	 * configured with storageUnit = DATASET
-	 * 
 	 * @param dsInfo
 	 *            describes the data set with the files to be deleted
 	 * 
@@ -27,9 +24,6 @@ public interface MainStorageInterface {
 
 	/**
 	 * Deletes the specified file
-	 * 
-	 * A dummy may be provided if the readOnly flag is set and no archive
-	 * storage has been configured with storageUnit = DATAFILE
 	 * 
 	 * @param location
 	 *            location of the data file to be deleted
@@ -52,9 +46,6 @@ public interface MainStorageInterface {
 	/**
 	 * See if the data set exists.
 	 * 
-	 * A dummy implementation can be provided if no archive storage is
-	 * configured with storageUnit set to dataset
-	 * 
 	 * @param dsInfo
 	 *            describes the data set being queried
 	 * 
@@ -64,9 +55,6 @@ public interface MainStorageInterface {
 
 	/**
 	 * See if the data file exists.
-	 * 
-	 * A dummy may be provided if the readOnly flag is set and no archive
-	 * storage has been configured with storageUnit = DATAFILE
 	 * 
 	 * @param location
 	 *            the value from datafile.location
@@ -102,9 +90,6 @@ public interface MainStorageInterface {
 	 * Return the list of DfInfos which should be archived to reduce the used
 	 * storage to between lowArchivingLevel and highArchivingLevel.
 	 * 
-	 * A dummy implementation can be provided if no archive storage is
-	 * configured with storageUnit set to datafile
-	 * 
 	 * The implementaion is free to do this however it chooses. Use might be
 	 * made of the information available from the java.nio.file.FileStore
 	 * (obtainable by Files.getFileStore(path) for any file to see whether or
@@ -128,9 +113,6 @@ public interface MainStorageInterface {
 	/**
 	 * Return the list of DsInfos which should be archived to reduce the used
 	 * storage to between lowArchivingLevel and highArchivingLevel.
-	 * 
-	 * A dummy implementation can be provided if no archive storage is
-	 * configured with storageUnit set to dataset
 	 * 
 	 * The implementaion is free to do this however it chooses. Use might be
 	 * made of the information available from the java.nio.file.FileStore
@@ -158,9 +140,6 @@ public interface MainStorageInterface {
 	 * This is only useful if the file system is available to the user. In this
 	 * case all files on the file system should only be readable by the user
 	 * running the ids server.
-	 * 
-	 * If the file system is not available to the user a dummy implementation
-	 * may be provided.
 	 * 
 	 * @param location
 	 *            the value from datafile.location
@@ -206,8 +185,6 @@ public interface MainStorageInterface {
 
 	/**
 	 * Store the data file at the specified location.
-	 * 
-	 * If no archive storage is in use a dummy may be provided.
 	 * 
 	 * @param inputStream
 	 *            stream of data to store

@@ -13,8 +13,8 @@ import java.util.Set;
 public interface ArchiveStorageInterface {
 
 	/**
-	 * Delete the specified data set. A non-dummy version is needed if
-	 * StorageUnit is DATASET.
+	 * Delete the specified data set.
+	 * 
 	 * Implementations must not throw an error if the data set does
 	 * not exist in the storage.
 	 * 
@@ -27,8 +27,7 @@ public interface ArchiveStorageInterface {
 	public void delete(DsInfo dsInfo) throws IOException;
 
 	/**
-	 * Remove the data file from the specified location. A non-dummy version is
-	 * needed if StorageUnit is DATAFILE.
+	 * Remove the data file from the specified location.
 	 * 
 	 * @param location
 	 *            where to store the file
@@ -39,8 +38,7 @@ public interface ArchiveStorageInterface {
 	public void delete(String location) throws IOException;
 
 	/**
-	 * Get the specified data set. A non-dummy version is needed if StorageUnit
-	 * is DATASET.
+	 * Get the specified data set.
 	 * 
 	 * @param dsInfo
 	 *            describes the data set
@@ -55,8 +53,7 @@ public interface ArchiveStorageInterface {
 	public void get(DsInfo dsInfo, Path path) throws IOException;
 
 	/**
-	 * Store the specified data set. A non-dummy version is needed if
-	 * StorageUnit is DATASET.
+	 * Store the specified data set.
 	 * 
 	 * @param dsInfo
 	 *            describes the data set
@@ -70,8 +67,7 @@ public interface ArchiveStorageInterface {
 	public void put(DsInfo dsInfo, InputStream inputStream) throws IOException;
 
 	/**
-	 * Store the data file at the specified location. A non-dummy version is
-	 * needed if StorageUnit is DATAFILE.
+	 * Store the data file at the specified location.
 	 * 
 	 * @param inputStream
 	 *            stream of data to store
@@ -86,8 +82,7 @@ public interface ArchiveStorageInterface {
 	/**
 	 * Restore the datafiles from archive to main storage. Note that this is not
 	 * expected to throw any exceptions but will return a set of failed DfInfo
-	 * objects. A non-dummy version is needed if StorageUnit is DATAFILE. The
-	 * implementation is expected to make use of @see
+	 * objects. The  implementation is expected to make use of @see
 	 * {@link MainStorageInterface#put(InputStream,String location)} to store
 	 * the datafiles into main storage.
 	 * 
