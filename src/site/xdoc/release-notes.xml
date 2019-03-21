@@ -17,6 +17,8 @@
 				<li>Drop IOException from the MainStorageInterface.exists() methods.
 				Dummy implementations throw IllegalStateException rather then
 				IOException.  (Issue #5)</li>
+				<li>Document that delete() methods must not throw
+				NoSuchFileException.  (PR #9)</li>
 			</ul>
 		</section>
 
