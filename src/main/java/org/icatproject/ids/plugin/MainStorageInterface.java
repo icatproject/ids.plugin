@@ -14,6 +14,9 @@ public interface MainStorageInterface {
 	/**
 	 * Deletes the files of the specified data set.
 	 * 
+	 * Implementations must not throw an error if the data set does
+	 * not exist in the storage.
+	 * 
 	 * @param dsInfo
 	 *            describes the data set with the files to be deleted
 	 * 
@@ -24,6 +27,9 @@ public interface MainStorageInterface {
 
 	/**
 	 * Deletes the specified file
+	 * 
+	 * Implementations must not throw an error if the file does
+	 * not exist in the storage.
 	 * 
 	 * @param location
 	 *            location of the data file to be deleted

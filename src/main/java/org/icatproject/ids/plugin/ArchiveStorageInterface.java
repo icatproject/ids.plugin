@@ -29,6 +29,9 @@ public interface ArchiveStorageInterface {
 	/**
 	 * Remove the data file from the specified location.
 	 * 
+	 * Implementations must not throw an error if the data file does
+	 * not exist in the storage.
+	 * 
 	 * @param location
 	 *            where to store the file
 	 * 
