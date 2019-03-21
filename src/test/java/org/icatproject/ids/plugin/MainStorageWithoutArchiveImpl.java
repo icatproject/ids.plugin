@@ -31,4 +31,9 @@ public class MainStorageWithoutArchiveImpl extends MainStorageWithoutArchive {
 		return false;
 	}
 
+	@Override
+	public AutoCloseable lock(DsInfo dsInfo, boolean shared) throws AlreadyLockedException, IOException {
+		return null;
+	}
+
 }

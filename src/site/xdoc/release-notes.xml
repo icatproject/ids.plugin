@@ -10,6 +10,8 @@
 
 		<section name="1.5.0">
 			<ul>
+				<li>Add a new call lock(DsInfo, boolean) to the
+				MainStorageInterface (Issue icatproject/ids.server#80)</li>
 				<li>Add IllegalArgumentException to method
 				MainStorageInterface.put(DsInfo, String, InputStream).
 				Implementations may throw this exception if sanity checks on name or
