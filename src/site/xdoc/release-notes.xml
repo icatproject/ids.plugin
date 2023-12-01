@@ -8,6 +8,12 @@
 
 	<body>
 
+		<section name="2.0.0">
+			<ul>
+				<li>Raise Java version to build for to Java 11.  (PR #10)</li>
+			</ul>
+		</section>
+
 		<section name="1.5.0">
 			<ul>
 				<li>Add a new call lock(DsInfo, boolean) to the
